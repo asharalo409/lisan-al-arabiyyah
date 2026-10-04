@@ -310,4 +310,134 @@
       document.getElementById("questionNumber").innerText =
         "প্রশ্ন " + (currentQuestion + 1);
 
-      document
+      document.getElementById("questionText").innerText = current.question;
+
+      document.getElementById("score").innerText = score;
+
+      const optionsBox = document.getElementById("options");
+      optionsBox.innerHTML = "";
+
+      current.options.forEach(function (option, index) {
+        const button = document.createElement("button");
+
+        button.className = "option";
+        button.innerText = option;
+
+        button.onclick = function () {
+          selectAnswer(index, button);
+        };
+
+        optionsBox.appendChild(button);
+      });
+
+      document.getElementById("answerBox").style.display = "none";
+
+      const nextButton = document.getElementById("nextButton");
+      nextButton.disabled = true;
+
+      if (currentQuestion === questions.length - 1) {
+        nextButton.innerText = "ফলাফল দেখুন";
+      } else {
+        nextButton.innerText = "পরের প্রশ্ন";
+      }
+    }
+
+    function selectAnswer(index, button) {
+      if (answered) {
+        return;
+      }
+
+      selectedAnswer = index;
+
+      const allOptions = document.querySelectorAll(".option");
+
+      allOptions.forEach(function (item) {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+
+      document.getElementById("nextButton").disabled = false;
+    }
+
+    function nextQuestion() {
+      if (selectedAnswer === null || answered) {
+        return;
+      }
+
+      answered = true;
+
+      const current = questions[currentQuestion];
+      const allOptions = document.querySelectorAll(".option");
+
+      allOptions.forEach(function (item, index) {
+        item.disabled = true;
+
+        if (index === current.answer) {
+          item.classList.add("correct");
+        }
+
+        if (index === selectedAnswer && index !== current.answer) {
+          item.classList.add("wrong");
+        }
+      });
+
+      if (selectedAnswer === current.answer) {
+        score++;
+        document.getElementById("score").innerText = score;
+      }
+
+      const answerBox = document.getElementById("answerBox");
+      answerBox.innerText = current.explanation;
+      answerBox.style.display = "block";
+
+      const nextButton = document.getElementById("nextButton");
+
+      if (currentQuestion === questions.length - 1) {
+        nextButton.innerText = "ফলাফল দেখুন";
+      } else {
+        nextButton.innerText = "পরের প্রশ্ন";
+      }
+
+      nextButton.onclick = function () {
+        if (currentQuestion === questions.length - 1) {
+          showResult();
+        } else {
+          currentQuestion++;
+          loadQuestion();
+        }
+      };
+    }
+
+    function showResult() {
+      document.getElementById("questionCard").style.display = "none";
+      document.getElementById("resultCard").style.display = "block";
+
+      document.getElementById("resultText").innerHTML =
+        "আপনি <strong>" + questions.length + "</strong> টি প্রশ্নের মধ্যে " +
+        "<strong>" + score + "</strong> টি সঠিক উত্তর দিয়েছেন।<br><br>" +
+        "নিয়মিত অনুশীলন চালিয়ে যান, ইনশাআল্লাহ।";
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      selectedAnswer = null;
+      answered = false;
+
+      document.getElementById("questionCard").style.display = "block";
+      document.getElementById("resultCard").style.display = "none";
+
+      loadQuestion();
+    }
+
+    loadQuestion();
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js");
+      });
+    }
+  </script>
+</body>
+</html>

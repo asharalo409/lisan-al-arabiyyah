@@ -232,29 +232,31 @@
       <h2 class="section-title">আজ কী শিখবেন?</h2>
 
       <div class="grid">
-        <div class="card">
+
+        <div class="card" onclick="window.location.href='lessons.html'">
           <div class="icon">📚</div>
           <h3>আরবি পাঠ</h3>
           <p>বর্ণ, শব্দ, বাক্য ও ব্যাকরণ শিখুন</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="showComingSoon('শব্দভান্ডার')">
           <div class="icon">🔤</div>
           <h3>শব্দভান্ডার</h3>
           <p>প্রয়োজনীয় আরবি শব্দ ও বাংলা অর্থ শিখুন</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="showComingSoon('কুইজ')">
           <div class="icon">📝</div>
           <h3>কুইজ</h3>
           <p>প্রশ্নের উত্তর দিয়ে নিজের জ্ঞান যাচাই করুন</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="showComingSoon('কথোপকথন')">
           <div class="icon">🎙️</div>
           <h3>কথোপকথন</h3>
           <p>দৈনন্দিন আরবি সংলাপ অনুশীলন করুন</p>
         </div>
+
       </div>
     </section>
 
@@ -264,28 +266,29 @@
         আরবিতে লিখুন বা বলুন। AI আপনার ভুল সংশোধন করবে,
         আরবিতে উত্তর দেবে এবং বাংলায় সহজ ব্যাখ্যা করবে।
       </p>
-      <button class="ai-button" onclick="showMessage()">
+
+      <button class="ai-button" onclick="showComingSoon('AI আরবি শিক্ষক')">
         AI শিক্ষকের সঙ্গে কথা বলুন
       </button>
     </section>
 
     <nav class="bottom-nav">
-      <div class="nav-item active">
+      <div class="nav-item active" onclick="window.location.href='index.html'">
         <span class="nav-icon">⌂</span>
         হোম
       </div>
 
-      <div class="nav-item">
+      <div class="nav-item" onclick="window.location.href='lessons.html'">
         <span class="nav-icon">📚</span>
         পাঠ
       </div>
 
-      <div class="nav-item">
+      <div class="nav-item" onclick="showComingSoon('AI চ্যাট')">
         <span class="nav-icon">💬</span>
         AI চ্যাট
       </div>
 
-      <div class="nav-item">
+      <div class="nav-item" onclick="showComingSoon('প্রোফাইল')">
         <span class="nav-icon">👤</span>
         প্রোফাইল
       </div>
@@ -294,8 +297,8 @@
   </main>
 
   <script>
-    function showMessage() {
-      alert("AI আরবি শিক্ষক ফিচারটি শিগগিরই যুক্ত করা হবে, ইনশাআল্লাহ।");
+    function showComingSoon(featureName) {
+      alert(featureName + " ফিচারটি শিগগিরই যুক্ত করা হবে, ইনশাআল্লাহ।");
     }
 
     if ("serviceWorker" in navigator) {

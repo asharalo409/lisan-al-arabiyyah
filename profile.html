@@ -121,51 +121,34 @@
       font-size: 19px;
     }
 
-    .progress-card {
-      padding: 17px;
+    .study-box {
+      padding: 16px;
       border-radius: 17px;
       background: #fffdf5;
       border: 1px solid #e7d9a8;
     }
 
-    .progress-top {
+    .study-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 11px;
+      padding: 11px 0;
+      border-bottom: 1px solid #f0e5bd;
     }
 
-    .progress-top h3 {
+    .study-row:last-child {
+      border-bottom: none;
+    }
+
+    .study-label {
       color: #705500;
-      font-size: 16px;
-    }
-
-    .progress-top span {
-      color: #9a7200;
       font-size: 14px;
+    }
+
+    .study-value {
+      color: #9a7200;
+      font-size: 17px;
       font-weight: bold;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 10px;
-      background: #f0e5bd;
-      border-radius: 50px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      width: 10%;
-      height: 100%;
-      background: #b68a00;
-      border-radius: 50px;
-    }
-
-    .progress-text {
-      margin-top: 10px;
-      color: #736c54;
-      font-size: 13px;
-      line-height: 1.6;
     }
 
     .stats-grid {
@@ -286,22 +269,23 @@
         </button>
       </section>
 
-      <h2 class="section-title">শেখার অগ্রগতি</h2>
+      <h2 class="section-title">আজকের পড়ার সময়</h2>
 
-      <section class="progress-card">
-        <div class="progress-top">
-          <h3>আরবি প্রাথমিক কোর্স</h3>
-          <span>১০%</span>
+      <section class="study-box">
+        <div class="study-row">
+          <span class="study-label">আজ পড়েছেন</span>
+          <span class="study-value" id="todayStudyTime">০ মিনিট</span>
         </div>
 
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
+        <div class="study-row">
+          <span class="study-label">মোট পড়ার সময়</span>
+          <span class="study-value" id="totalStudyTime">০ মিনিট</span>
         </div>
 
-        <p class="progress-text">
-          আপনি ১০টি পাঠের মধ্যে ১টি পাঠ শুরু করেছেন।
-          নিয়মিত চর্চা চালিয়ে যান।
-        </p>
+        <div class="study-row">
+          <span class="study-label">ধারাবাহিক শেখার দিন</span>
+          <span class="study-value" id="studyStreak">০ দিন</span>
+        </div>
       </section>
 
       <h2 class="section-title">আমার পরিসংখ্যান</h2>
@@ -337,9 +321,9 @@
         </div>
       </section>
 
-      <h2 class="section-title">অ্যাকাউন্ট</h2>
+      <h2 class="section-title">অ্যাকাউন্ট ও সেটিংস</h2>
 
-      <div class="menu-card" onclick="alert('Login ফিচারটি পরে যুক্ত করা হবে।')">
+      <div class="menu-card" onclick="alert('Login ফিচারটি পরে Supabase-এর সঙ্গে যুক্ত করা হবে।')">
         <div class="menu-icon">🔐</div>
 
         <div class="menu-text">
@@ -350,12 +334,12 @@
         <div class="arrow">›</div>
       </div>
 
-      <div class="menu-card" onclick="alert('Settings ফিচারটি পরে যুক্ত করা হবে।')">
+      <div class="menu-card" onclick="window.location.href='settings.html'">
         <div class="menu-icon">⚙️</div>
 
         <div class="menu-text">
           <h3>সেটিংস</h3>
-          <p>ভাষা, নোটিফিকেশন ও অন্যান্য পছন্দ</p>
+          <p>Theme, notification ও পড়ার reminder নিয়ন্ত্রণ করুন</p>
         </div>
 
         <div class="arrow">›</div>
@@ -363,6 +347,8 @@
 
     </section>
   </main>
+
+  <script src="app.js"></script>
 
   <script>
     if ("serviceWorker" in navigator) {

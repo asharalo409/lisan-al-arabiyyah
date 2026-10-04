@@ -6,34 +6,21 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const message = req.body?.message?.trim();
+    var message = req.body.message;
 
-    if (!message) {
-      return res.status(400).json({
-        error: "আপনার লেখা পাওয়া যায়নি।"
-      });
-    }
+    var prompt = `
+তুমি একজন আরবি শিক্ষক।
 
-    const prompt = `
-তুমি একজন সহায়ক আরবি ভাষার শিক্ষক।
+শিক্ষার্থীর লেখা: ${message}
 
-শিক্ষার্থীর লেখা:
-"${message}"
+এই format-এ উত্তর দাও:
 
-শুধু নিচের format-এ উত্তর দাও:
-
-ARABIC: শিক্ষার্থীর কথার প্রাসঙ্গিক আরবি উত্তর
-BANGLA: আরবি বাক্যটির সহজ বাংলা অর্থ
-CORRECTION: শিক্ষার্থীর ভুল থাকলে শুদ্ধ বাক্য ও কারণ, না থাকলে "ভালো বলেছেন।"
-
-নিয়ম:
-- প্রতিবার শিক্ষার্থীর নতুন কথার ভিত্তিতে নতুন উত্তর দেবে।
-- সবসময় একই উত্তর দেবে না।
-- আরবি সহজ রাখবে।
-- উত্তর সংক্ষিপ্ত রাখবে।
+ARABIC: আরবিতে উত্তর
+BANGLA: সহজ বাংলা অর্থ
+CORRECTION: ভুল থাকলে শুদ্ধ করো, না থাকলে ভালো বলেছেন।
 `;
 
-    const geminiResponse = await fetch(
+    var response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/interactions",
       {
         method: "POST",
@@ -49,73 +36,72 @@ CORRECTION: শিক্ষার্থীর ভুল থাকলে শু�
       }
     );
 
-    const result = await geminiResponse.json();
+    var result = await response.json();
 
-    if (!geminiResponse.ok) {
+    if (!response.ok) {
       return res.status(500).json({
-        error:
-          result?.error?.message ||
-          "Gemini API থেকে উত্তর পাওয়া যায়নি।"
+        error: result.error.message
       });
     }
 
-    let outputText = "";
+    var outputText = "";
 
-    for (const step of result.steps || []) {
+    for (var i = 0; i < result.steps.length; i++) {
+      var step = result.steps[i];
+
       if (step.type === "model_output") {
-        for (const content of step.content || []) {
-          if (content.type === "text" && content.text) {
-            outputText += content.text + "
-";
+        for (var j = 0; j < step.content.length; j++) {
+          if (step.content[j].text) {
+            outputText += step.content[j].text;
+            outputText += String.fromCharCode(10);
           }
         }
       }
     }
 
-    outputText = outputText.trim();
+    var arabic = "";
+    var bangla = "";
+    var correction = "";
+    var section = "";
 
-    if (!outputText) {
-      return res.status(500).json({
-        error:
-          "Gemini উত্তর দিয়েছে, কিন্তু লেখা পাওয়া যায়নি। Vercel Function Logs দেখুন।"
-      });
+    var lines = outputText.split(String.fromCharCode(10));
+
+    for (var k = 0; k < lines.length; k++) {
+      var line = lines[k].trim();
+
+      if (line.startsWith("ARABIC:")) {
+        section = "arabic";
+        arabic = line.replace("ARABIC:", "").trim();
+      } else if (line.startsWith("BANGLA:")) {
+        section = "bangla";
+        bangla = line.replace("BANGLA:", "").trim();
+      } else if (line.startsWith("CORRECTION:")) {
+        section = "correction";
+        correction = line.replace("CORRECTION:", "").trim();
+      } else if (line) {
+        if (section === "arabic") {
+          arabic += " " + line;
+        }
+
+        if (section === "bangla") {
+          bangla += " " + line;
+        }
+
+        if (section === "correction") {
+          correction += " " + line;
+        }
+      }
     }
 
-    const arabicMatch = outputText.match(
-      /ARABIC:s*([sS]*?)(?=
-s*BANGLA:|$)/i
-    );
-
-    const banglaMatch = outputText.match(
-      /BANGLA:s*([sS]*?)(?=
-s*CORRECTION:|$)/i
-    );
-
-    const correctionMatch = outputText.match(
-      /CORRECTION:s*([sS]*)/i
-    );
-
-    const arabic = arabicMatch
-      ? arabicMatch[1].trim()
-      : outputText;
-
-    const bangla = banglaMatch
-      ? banglaMatch[1].trim()
-      : "AI শিক্ষকের উত্তর উপরে দেওয়া হয়েছে।";
-
-    const correction = correctionMatch
-      ? correctionMatch[1].trim()
-      : "ভালো চেষ্টা করেছেন।";
-
     return res.status(200).json({
-      arabic: arabic,
-      bangla: bangla,
-      correction: correction
+      arabic: arabic || "أَحْسَنْتَ",
+      bangla: bangla || "ভালো চেষ্টা করেছেন।",
+      correction: correction || "ভালো বলেছেন।"
     });
 
   } catch (error) {
     return res.status(500).json({
-      error: "Server error: " + error.message
+      error: error.message
     });
   }
 };

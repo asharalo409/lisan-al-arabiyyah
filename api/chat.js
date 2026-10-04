@@ -6,38 +6,34 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const message = req.body.message || "";
+    const message = req.body?.message?.trim();
 
     if (!message) {
       return res.status(400).json({
-        error: "কোনো কথা পাওয়া যায়নি।"
+        error: "আপনার লেখা পাওয়া যায়নি।"
       });
     }
 
     const prompt = `
-তুমি "لِسَانُ العَرَبِيَّة" অ্যাপের আরবি শিক্ষক রোবট।
+তুমি একজন সহায়ক আরবি ভাষার শিক্ষক।
 
-শিক্ষার্থী বাংলা ভাষাভাষী।
-সে সহজ থেকে কঠিন আরবি কথোপকথন শিখছে।
+শিক্ষার্থীর লেখা:
+"${message}"
 
-শিক্ষার্থীর লেখা বা বলা কথা:
-${message}
+শুধু নিচের format-এ উত্তর দাও:
 
-তুমি অবশ্যই নিচের তিনটি line-এ উত্তর দেবে:
-
-ARABIC: শুদ্ধ, সহজ এবং ছোট আরবি উত্তর।
-BANGLA: বাংলায় খুব সহজ অর্থ বা ব্যাখ্যা।
-CORRECTION: শিক্ষার্থীর ভুল থাকলে শুদ্ধ বাক্য ও ছোট কারণ। ভুল না থাকলে লিখবে: ভালো বলেছেন।
+ARABIC: শিক্ষার্থীর কথার প্রাসঙ্গিক আরবি উত্তর
+BANGLA: আরবি বাক্যটির সহজ বাংলা অর্থ
+CORRECTION: শিক্ষার্থীর ভুল থাকলে শুদ্ধ বাক্য ও কারণ, না থাকলে "ভালো বলেছেন।"
 
 নিয়ম:
-- আরবিতে শিক্ষকের মতো কথা বলবে।
-- শিক্ষার্থী ভুল করলে ভদ্রভাবে সংশোধন করবে।
-- একবারে ছোট উত্তর দেবে।
-- কঠিন আরবি শব্দ কম ব্যবহার করবে।
-- শেষে শিক্ষার্থীকে একটি সহজ আরবি প্রশ্ন করবে।
+- প্রতিবার শিক্ষার্থীর নতুন কথার ভিত্তিতে নতুন উত্তর দেবে।
+- সবসময় একই উত্তর দেবে না।
+- আরবি সহজ রাখবে।
+- উত্তর সংক্ষিপ্ত রাখবে।
 `;
 
-    const response = await fetch(
+    const geminiResponse = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/interactions",
       {
         method: "POST",
@@ -53,37 +49,46 @@ CORRECTION: শিক্ষার্থীর ভুল থাকলে শু�
       }
     );
 
-    const result = await response.json();
+    const result = await geminiResponse.json();
 
-    if (!response.ok) {
+    if (!geminiResponse.ok) {
       return res.status(500).json({
-        error: result.error?.message || "Gemini AI error"
+        error:
+          result?.error?.message ||
+          "Gemini API থেকে উত্তর পাওয়া যায়নি।"
       });
     }
 
-    const outputSteps = (result.steps || []).filter(function (step) {
-      return step.type === "model_output";
-    });
+    let outputText = "";
 
-    const outputText = outputSteps
-      .flatMap(function (step) {
-        return step.content || [];
-      })
-      .map(function (item) {
-        return item.text || "";
-      })
-      .join("
-")
-      .trim();
+    for (const step of result.steps || []) {
+      if (step.type === "model_output") {
+        for (const content of step.content || []) {
+          if (content.type === "text" && content.text) {
+            outputText += content.text + "
+";
+          }
+        }
+      }
+    }
+
+    outputText = outputText.trim();
+
+    if (!outputText) {
+      return res.status(500).json({
+        error:
+          "Gemini উত্তর দিয়েছে, কিন্তু লেখা পাওয়া যায়নি। Vercel Function Logs দেখুন।"
+      });
+    }
 
     const arabicMatch = outputText.match(
       /ARABIC:s*([sS]*?)(?=
-BANGLA:|$)/i
+s*BANGLA:|$)/i
     );
 
     const banglaMatch = outputText.match(
       /BANGLA:s*([sS]*?)(?=
-CORRECTION:|$)/i
+s*CORRECTION:|$)/i
     );
 
     const correctionMatch = outputText.match(
@@ -92,11 +97,11 @@ CORRECTION:|$)/i
 
     const arabic = arabicMatch
       ? arabicMatch[1].trim()
-      : outputText || "أَحْسَنْتَ، تَابِعْ.";
+      : outputText;
 
     const bangla = banglaMatch
       ? banglaMatch[1].trim()
-      : "AI শিক্ষক আপনার কথার উত্তর দিয়েছে।";
+      : "AI শিক্ষকের উত্তর উপরে দেওয়া হয়েছে।";
 
     const correction = correctionMatch
       ? correctionMatch[1].trim()
@@ -110,7 +115,7 @@ CORRECTION:|$)/i
 
   } catch (error) {
     return res.status(500).json({
-      error: error.message || "AI শিক্ষক এখন উত্তর দিতে পারছে না।"
+      error: "Server error: " + error.message
     });
   }
 };

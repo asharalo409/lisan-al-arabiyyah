@@ -1,240 +1,90 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>আরবি পাঠ | لِسَانُ العَرَبِيَّة</title>
-
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#0B5D3B" />
+  <title>আরবি দৈনন্দিন পাঠ</title>
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: Arial, "Noto Sans Arabic", sans-serif;
-      background: #f6f7f2;
-      color: #18352a;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f7f3;
+      color: #173c2b;
     }
 
     .app {
       max-width: 520px;
       min-height: 100vh;
-      margin: 0 auto;
-      background: #ffffff;
-      padding-bottom: 30px;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #0b5d3b, #15835a);
-      color: white;
-      padding: 18px 16px;
-    }
-
-    .back-button {
-      width: 38px;
-      height: 38px;
-      border: none;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.18);
-      color: white;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    .header h1 {
-      font-size: 20px;
-    }
-
-    .header p {
-      margin-top: 3px;
-      font-size: 12px;
-      opacity: 0.9;
-    }
-
-    .content {
-      padding: 18px 16px;
-    }
-
-    .progress-box {
-      padding: 16px;
-      border-radius: 16px;
-      background: #e8f6ee;
-      border: 1px solid #b8e0c7;
-      margin-bottom: 20px;
-    }
-
-    .progress-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #075b34;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 9px;
-      background: #ccebd7;
-      border-radius: 50px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      width: 10%;
-      height: 100%;
-      background: #087443;
-      border-radius: 50px;
-    }
-
-    .section-title {
-      margin: 20px 0 12px;
-      font-size: 19px;
-      color: #18352a;
-    }
-
-    .lesson-card {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 15px;
-      margin-bottom: 12px;
+      margin: auto;
+      padding-bottom: 25px;
       background: white;
-      border: 1px solid #e5ebe6;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(20, 70, 45, 0.06);
     }
 
-    .lesson-number {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #e8f6ee;
-      color: #087443;
-      font-weight: bold;
+    header {
+      padding: 22px 18px 28px;
+      color: white;
+      background: linear-gradient(135deg, #075b34, #138555);
+      border-radius: 0 0 25px 25px;
     }
 
-    .lesson-info {
-      flex: 1;
+    header a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
     }
 
-    .lesson-info h3 {
-      font-size: 16px;
-      margin-bottom: 5px;
+    header h1 {
+      margin: 17px 0 7px;
+      font-size: 25px;
     }
 
-    .lesson-info p {
-      color: #6e7e75;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .arrow {
-      font-size: 24px;
-      color: #087443;
-    }
-
-    .active-lesson {
-      border: 2px solid #168354;
-      background: #f6fff9;
-    }
-
-    .lesson-box {
-      padding: 20px 16px;
-      border-radius: 18px;
-      background: #fffdf5;
-      border: 1px solid #e7d9a8;
-      margin-top: 20px;
-    }
-
-    .lesson-label {
-      color: #9a7200;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .arabic-text {
-      direction: rtl;
-      text-align: right;
-      color: #0b5d3b;
-      font-size: 29px;
-      font-weight: bold;
-      line-height: 1.8;
-      margin-bottom: 15px;
-    }
-
-    .pronunciation,
-    .translation {
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 11px;
+    header p {
+      margin: 0;
       font-size: 14px;
       line-height: 1.6;
     }
 
-    .pronunciation {
-      background: #edf6ff;
-      color: #24526d;
-    }
-
-    .translation {
-      background: #e8f6ee;
-      color: #24583e;
-    }
-
-    .word-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .word-card {
-      padding: 13px 10px;
-      text-align: center;
-      border: 1px solid #e5ebe6;
-      border-radius: 13px;
-      background: white;
-    }
-
-    .word-arabic {
-      direction: rtl;
-      font-size: 21px;
-      font-weight: bold;
-      color: #0b5d3b;
-      margin-bottom: 5px;
-    }
-
-    .word-bangla {
-      color: #6e7e75;
-      font-size: 12px;
-    }
-
-    .complete-button {
-      width: 100%;
-      margin-top: 18px;
+    .notice {
+      margin: 16px;
       padding: 14px;
-      border: none;
-      border-radius: 12px;
-      background: #087443;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
+      color: #075b34;
+      background: #e7f6ed;
+      border: 1px solid #b8dfc7;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .lesson-list {
+      padding: 0 16px;
+    }
+
+    .lesson-card {
+      display: block;
+      margin-bottom: 12px;
+      padding: 19px;
+      color: #075b34;
+      background: #f1faf4;
+      border: 1px solid #c7e5d1;
+      border-radius: 15px;
+      text-decoration: none;
+    }
+
+    .lesson-card h2 {
+      margin: 0 0 7px;
+      font-size: 19px;
+    }
+
+    .lesson-card p {
+      margin: 0;
+      color: #5c7468;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -242,129 +92,125 @@
 <body>
   <main class="app">
 
-    <header class="header">
-      <button class="back-button" onclick="window.location.href='index.html'">←</button>
+    <header>
+      <a href="chat.html">← AI স্যারের কাছে যান</a>
 
-      <div>
-        <h1>আরবি পাঠ</h1>
-        <p>لِسَانُ العَرَبِيَّة</p>
-      </div>
+      <h1>দৈনন্দিন আরবি পাঠ</h1>
+
+      <p>
+        ১০০টি পাঠে দৈনন্দিন জীবনের আরবি কথোপকথন শিখুন।
+      </p>
     </header>
 
-    <section class="content">
+    <div class="notice">
+      প্রতি অংশে ৫টি পাঠ আছে। প্রতি পাঠে ২০টি আরবি বাক্য,
+      বাংলা অর্থ এবং 🔊 শুনুন button থাকবে।
+    </div>
 
-      <div class="progress-box">
-        <div class="progress-top">
-          <span>আপনার শেখার অগ্রগতি</span>
-          <span>১ / ১০ পাঠ</span>
-        </div>
+    <section class="lesson-list">
 
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
-        </div>
-      </div>
+      <a class="lesson-card" href="lessons-1-5.html">
+        <h2>পাঠ ১–৫</h2>
+        <p>সালাম, পরিচয়, পরিবার, ঘর ও দৈনন্দিন কথা</p>
+      </a>
 
-      <h2 class="section-title">পাঠসমূহ</h2>
+      <a class="lesson-card" href="lessons-6-10.html">
+        <h2>পাঠ ৬–১০</h2>
+        <p>সকাল, খাবার, পানীয়, রান্না ও রেস্টুরেন্ট</p>
+      </a>
 
-      <div class="lesson-card active-lesson">
-        <div class="lesson-number">১</div>
+      <a class="lesson-card" href="lessons-11-15.html">
+        <h2>পাঠ ১১–১৫</h2>
+        <p>বাজার, দোকান, দাম ও কেনাকাটা</p>
+      </a>
 
-        <div class="lesson-info">
-          <h3>সালাম ও পরিচয়</h3>
-          <p>আরবিতে সালাম দেওয়া এবং সহজ পরিচয় শেখুন</p>
-        </div>
+      <a class="lesson-card" href="lessons-16-20.html">
+        <h2>পাঠ ১৬–২০</h2>
+        <p>রাস্তা, যানবাহন, ভ্রমণ ও দিকনির্দেশনা</p>
+      </a>
 
-        <div class="arrow">›</div>
-      </div>
+      <a class="lesson-card" href="lessons-21-25.html">
+        <h2>পাঠ ২১–২৫</h2>
+        <p>স্কুল, পড়াশোনা, কাজ ও অফিস</p>
+      </a>
 
-      <div class="lesson-card">
-        <div class="lesson-number">২</div>
+      <a class="lesson-card" href="lessons-26-30.html">
+        <h2>পাঠ ২৬–৩০</h2>
+        <p>মসজিদ, ইবাদত ও ইসলামি কথাবার্তা</p>
+      </a>
 
-        <div class="lesson-info">
-          <h3>আরবি বর্ণমালা</h3>
-          <p>ا থেকে ي পর্যন্ত আরবি অক্ষর চিনুন</p>
-        </div>
+      <a class="lesson-card" href="lessons-31-35.html">
+        <h2>পাঠ ৩১–৩৫</h2>
+        <p>ফোন, বন্ধু, দেখা করা ও আমন্ত্রণ</p>
+      </a>
 
-        <div class="arrow">›</div>
-      </div>
+      <a class="lesson-card" href="lessons-36-40.html">
+        <h2>পাঠ ৩৬–৪০</h2>
+        <p>ডাক্তার, অসুস্থতা ও জরুরি কথা</p>
+      </a>
 
-      <div class="lesson-card">
-        <div class="lesson-number">৩</div>
+      <a class="lesson-card" href="lessons-41-45.html">
+        <h2>পাঠ ৪১–৪৫</h2>
+        <p>আবহাওয়া, সময়, দিন ও মাস</p>
+      </a>
 
-        <div class="lesson-info">
-          <h3>নিজের পরিচয়</h3>
-          <p>নাম, দেশ ও শিক্ষার কথা আরবিতে বলুন</p>
-        </div>
+      <a class="lesson-card" href="lessons-46-50.html">
+        <h2>পাঠ ৪৬–৫০</h2>
+        <p>দৈনন্দিন পূর্ণ কথোপকথন</p>
+      </a>
 
-        <div class="arrow">›</div>
-      </div>
+      <a class="lesson-card" href="lessons-51-55.html">
+        <h2>পাঠ ৫১–৫৫</h2>
+        <p>আরও দৈনন্দিন আরবি অনুশীলন</p>
+      </a>
 
-      <div class="lesson-card">
-        <div class="lesson-number">৪</div>
+      <a class="lesson-card" href="lessons-56-60.html">
+        <h2>পাঠ ৫৬–৬০</h2>
+        <p>কথা বলা ও প্রশ্ন করা</p>
+      </a>
 
-        <div class="lesson-info">
-          <h3>দৈনন্দিন কথোপকথন</h3>
-          <p>প্রতিদিনের প্রয়োজনীয় আরবি বাক্য শিখুন</p>
-        </div>
+      <a class="lesson-card" href="lessons-61-65.html">
+        <h2>পাঠ ৬১–৬৫</h2>
+        <p>বাসা, কাজ ও পরিবার</p>
+      </a>
 
-        <div class="arrow">›</div>
-      </div>
+      <a class="lesson-card" href="lessons-66-70.html">
+        <h2>পাঠ ৬৬–৭০</h2>
+        <p>ভ্রমণ ও প্রয়োজনীয় কথাবার্তা</p>
+      </a>
 
-      <section class="lesson-box">
-        <div class="lesson-label">পাঠ ১: সালাম ও পরিচয়</div>
+      <a class="lesson-card" href="lessons-71-75.html">
+        <h2>পাঠ ৭১–৭৫</h2>
+        <p>দোকান, খাবার ও সেবা</p>
+      </a>
 
-        <div class="arabic-text">اَلسَّلَامُ عَلَيْكُمْ</div>
+      <a class="lesson-card" href="lessons-76-80.html">
+        <h2>পাঠ ৭৬–৮০</h2>
+        <p>অতিথি, দাওয়াত ও সামাজিক কথা</p>
+      </a>
 
-        <div class="pronunciation">
-          <strong>উচ্চারণ:</strong> আস-সালামু আলাইকুম
-        </div>
+      <a class="lesson-card" href="lessons-81-85.html">
+        <h2>পাঠ ৮১–৮৫</h2>
+        <p>উন্নত দৈনন্দিন কথোপকথন</p>
+      </a>
 
-        <div class="translation">
-          <strong>বাংলা অর্থ:</strong> আপনার ওপর শান্তি বর্ষিত হোক।
-        </div>
+      <a class="lesson-card" href="lessons-86-90.html">
+        <h2>পাঠ ৮৬–৯০</h2>
+        <p>আরবি বলার অনুশীলন</p>
+      </a>
 
-        <h2 class="section-title">আজকের শব্দভান্ডার</h2>
+      <a class="lesson-card" href="lessons-91-95.html">
+        <h2>পাঠ ৯১–৯৫</h2>
+        <p>বাস্তব জীবনের আরবি সংলাপ</p>
+      </a>
 
-        <div class="word-grid">
-          <div class="word-card">
-            <div class="word-arabic">سَلَام</div>
-            <div class="word-bangla">শান্তি</div>
-          </div>
-
-          <div class="word-card">
-            <div class="word-arabic">عَلَيْكُمْ</div>
-            <div class="word-bangla">তোমাদের/আপনাদের ওপর</div>
-          </div>
-
-          <div class="word-card">
-            <div class="word-arabic">أَنَا</div>
-            <div class="word-bangla">আমি</div>
-          </div>
-
-          <div class="word-card">
-            <div class="word-arabic">طَالِب</div>
-            <div class="word-bangla">ছাত্র</div>
-          </div>
-        </div>
-
-        <button class="complete-button" onclick="completeLesson()">
-          ✓ পাঠটি সম্পন্ন করেছি
-        </button>
-      </section>
+      <a class="lesson-card" href="lessons-96-100.html">
+        <h2>পাঠ ৯৬–১০০</h2>
+        <p>শেষ অনুশীলন ও পূর্ণ কথোপকথন</p>
+      </a>
 
     </section>
+
   </main>
-
-  <script>
-    function completeLesson() {
-      alert("মাশাআল্লাহ! আপনি পাঠ ১ সম্পন্ন করেছেন।");
-    }
-
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
-        navigator.serviceWorker.register("service-worker.js");
-      });
-    }
-  </script>
 </body>
 </html>

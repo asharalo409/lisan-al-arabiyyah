@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>আরবি কুইজ | لِسَانُ العَرَبِيَّة</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0B5D3B" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: #f6f7f2;
+      color: #18352a;
+    }
+
+    .app {
+      max-width: 520px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #ffffff;
+      padding-bottom: 30px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0b5d3b, #15835a);
+      color: white;
+      padding: 18px 16px;
+    }
+
+    .back-button {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .header h1 {
+      font-size: 20px;
+    }
+
+    .header p {
+      margin-top: 3px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 18px 16px;
+    }
+
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 18px;
+      border-radius: 15px;
+      background: #e8f6ee;
+      border: 1px solid #b8e0c7;
+    }
+
+    .quiz-top p {
+      color: #075b34;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .score {
+      padding: 7px 11px;
+      border-radius: 20px;
+      background: #087443;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .question-card {
+      padding: 20px 16px;
+      border: 1px solid #e5ebe6;
+      border-radius: 18px;
+      background: white;
+      box-shadow: 0 4px 12px rgba(20, 70, 45, 0.06);
+    }
+
+    .question-number {
+      color: #087443;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-size: 19px;
+      line-height: 1.6;
+      color: #18352a;
+      margin-bottom: 18px;
+    }
+
+    .option {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid #dce6df;
+      border-radius: 12px;
+      background: white;
+      color: #18352a;
+      text-align: left;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .option:active {
+      transform: scale(0.98);
+    }
+
+    .option.selected {
+      border-color: #087443;
+      background: #e8f6ee;
+      color: #075b34;
+      font-weight: bold;
+    }
+
+    .option.correct {
+      border-color: #138a4f;
+      background: #dff5e7;
+      color: #075b34;
+      font-weight: bold;
+    }
+
+    .option.wrong {
+      border-color: #c83c3c;
+      background: #ffe6e6;
+      color: #9d2222;
+      font-weight: bold;
+    }
+
+    .answer-box {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #fff8df;
+      color: #705500;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .next-button,
+    .restart-button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #087443;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .next-button:disabled {
+      background: #a9b9b0;
+      cursor: not-allowed;
+    }
+
+    .result-card {
+      display: none;
+      text-align: center;
+      padding: 30px 18px;
+      border-radius: 18px;
+      background: #e8f6ee;
+      border: 1px solid #b8e0c7;
+    }
+
+    .result-icon {
+      font-size: 58px;
+      margin-bottom: 12px;
+    }
+
+    .result-card h2 {
+      color: #075b34;
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .result-card p {
+      color: #476158;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <header class="header">
+      <button class="back-button" onclick="window.location.href='index.html'">←</button>
+
+      <div>
+        <h1>আরবি কুইজ</h1>
+        <p>اِخْتِبَارُ اللُّغَةِ العَرَبِيَّة</p>
+      </div>
+    </header>
+
+    <section class="content">
+
+      <div class="quiz-top">
+        <p id="progressText">প্রশ্ন ১ / ৫</p>
+        <div class="score">স্কোর: <span id="score">০</span></div>
+      </div>
+
+      <section class="question-card" id="questionCard">
+        <div class="question-number" id="questionNumber">প্রশ্ন ১</div>
+
+        <h2 class="question" id="questionText"></h2>
+
+        <div id="options"></div>
+
+        <div class="answer-box" id="answerBox"></div>
+
+        <button class="next-button" id="nextButton" disabled onclick="nextQuestion()">
+          পরের প্রশ্ন
+        </button>
+      </section>
+
+      <section class="result-card" id="resultCard">
+        <div class="result-icon">🎉</div>
+        <h2>মাশাআল্লাহ!</h2>
+        <p id="resultText"></p>
+
+        <button class="restart-button" onclick="restartQuiz()">
+          আবার কুইজ দিন
+        </button>
+      </section>
+
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        question: "سَلَام শব্দের বাংলা অর্থ কী?",
+        options: ["নাম", "শান্তি", "বই", "ছাত্র"],
+        answer: 1,
+        explanation: "سَلَام অর্থ শান্তি।"
+      },
+      {
+        question: "أَنَا শব্দের বাংলা অর্থ কী?",
+        options: ["তুমি", "সে", "আমি", "আমরা"],
+        answer: 2,
+        explanation: "أَنَا অর্থ আমি।"
+      },
+      {
+        question: "طَالِب শব্দের অর্থ কী?",
+        options: ["ছাত্রী", "শিক্ষক", "ছাত্র", "বই"],
+        answer: 2,
+        explanation: "طَالِب অর্থ ছাত্র।"
+      },
+      {
+        question: "কোনটি 'বই' শব্দের আরবি?",
+        options: ["قَلَم", "كِتَاب", "بَيْت", "اِسْم"],
+        answer: 1,
+        explanation: "كِتَاب অর্থ বই।"
+      },
+      {
+        question: "اَلسَّلَامُ عَلَيْكُمْ-এর অর্থ কী?",
+        options: [
+          "আমি একজন ছাত্র",
+          "তোমার নাম কী?",
+          "আপনার ওপর শান্তি বর্ষিত হোক",
+          "আমি ভালো আছি"
+        ],
+        answer: 2,
+        explanation: "اَلسَّلَامُ عَلَيْكُمْ অর্থ: আপনার ওপর শান্তি বর্ষিত হোক।"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedAnswer = null;
+    let answered = false;
+
+    function loadQuestion() {
+      selectedAnswer = null;
+      answered = false;
+
+      const current = questions[currentQuestion];
+
+      document.getElementById("progressText").innerText =
+        "প্রশ্ন " + (currentQuestion + 1) + " / " + questions.length;
+
+      document.getElementById("questionNumber").innerText =
+        "প্রশ্ন " + (currentQuestion + 1);
+
+      document

@@ -9,7 +9,6 @@
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#0B5D3B" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
   <style>
     * {
@@ -221,7 +220,9 @@
 
     <section class="daily-card">
       <div class="small-title">আজকের আরবি বাক্য</div>
+
       <div class="daily-arabic">اَلسَّلَامُ عَلَيْكُمْ</div>
+
       <p class="meaning">
         উচ্চারণ: আস-সালামু আলাইকুম<br />
         অর্থ: আপনার ওপর শান্তি বর্ষিত হোক।
@@ -239,22 +240,34 @@
           <p>বর্ণ, শব্দ, বাক্য ও ব্যাকরণ শিখুন</p>
         </div>
 
-        <div class="card" onclick="showComingSoon('শব্দভান্ডার')">
+        <div class="card" onclick="window.location.href='vocabulary.html'">
           <div class="icon">🔤</div>
           <h3>শব্দভান্ডার</h3>
           <p>প্রয়োজনীয় আরবি শব্দ ও বাংলা অর্থ শিখুন</p>
         </div>
 
-        <div class="card" onclick="showComingSoon('কুইজ')">
+        <div class="card" onclick="window.location.href='quiz.html'">
           <div class="icon">📝</div>
           <h3>কুইজ</h3>
           <p>প্রশ্নের উত্তর দিয়ে নিজের জ্ঞান যাচাই করুন</p>
         </div>
 
-        <div class="card" onclick="showComingSoon('কথোপকথন')">
+        <div class="card" onclick="window.location.href='chat.html'">
           <div class="icon">🎙️</div>
           <h3>কথোপকথন</h3>
-          <p>দৈনন্দিন আরবি সংলাপ অনুশীলন করুন</p>
+          <p>AI শিক্ষকের সঙ্গে আরবিতে অনুশীলন করুন</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='profile.html'">
+          <div class="icon">📈</div>
+          <h3>আমার অগ্রগতি</h3>
+          <p>পড়ার সময়, স্কোর ও শেখার দিন দেখুন</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='settings.html'">
+          <div class="icon">⚙️</div>
+          <h3>সেটিংস</h3>
+          <p>Theme ও পড়ার reminder নিয়ন্ত্রণ করুন</p>
         </div>
 
       </div>
@@ -262,12 +275,13 @@
 
     <section class="ai-box">
       <h3>🤖 AI আরবি শিক্ষক</h3>
+
       <p>
-        আরবিতে লিখুন বা বলুন। AI আপনার ভুল সংশোধন করবে,
+        আরবিতে লিখুন বা বলুন। শিক্ষক আপনার ভুল সংশোধন করবে,
         আরবিতে উত্তর দেবে এবং বাংলায় সহজ ব্যাখ্যা করবে।
       </p>
 
-      <button class="ai-button" onclick="showComingSoon('AI আরবি শিক্ষক')">
+      <button class="ai-button" onclick="window.location.href='chat.html'">
         AI শিক্ষকের সঙ্গে কথা বলুন
       </button>
     </section>
@@ -283,12 +297,12 @@
         পাঠ
       </div>
 
-      <div class="nav-item" onclick="showComingSoon('AI চ্যাট')">
+      <div class="nav-item" onclick="window.location.href='chat.html'">
         <span class="nav-icon">💬</span>
         AI চ্যাট
       </div>
 
-      <div class="nav-item" onclick="showComingSoon('প্রোফাইল')">
+      <div class="nav-item" onclick="window.location.href='profile.html'">
         <span class="nav-icon">👤</span>
         প্রোফাইল
       </div>
@@ -296,11 +310,9 @@
 
   </main>
 
-  <script>
-    function showComingSoon(featureName) {
-      alert(featureName + " ফিচারটি শিগগিরই যুক্ত করা হবে, ইনশাআল্লাহ।");
-    }
+  <script src="app.js"></script>
 
+  <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("service-worker.js");

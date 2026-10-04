@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>শব্দভান্ডার | لِسَانُ العَرَبِيَّة</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0B5D3B" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: #f6f7f2;
+      color: #18352a;
+    }
+
+    .app {
+      max-width: 520px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #ffffff;
+      padding-bottom: 25px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0b5d3b, #15835a);
+      color: white;
+      padding: 18px 16px;
+    }
+
+    .back-button {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .header h1 {
+      font-size: 20px;
+    }
+
+    .header p {
+      margin-top: 3px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 18px 16px;
+    }
+
+    .intro {
+      padding: 16px;
+      border-radius: 16px;
+      background: #e8f6ee;
+      border: 1px solid #b8e0c7;
+      margin-bottom: 20px;
+    }
+
+    .intro h2 {
+      color: #075b34;
+      font-size: 18px;
+      margin-bottom: 7px;
+    }
+
+    .intro p {
+      color: #476158;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .category-title {
+      margin: 20px 0 12px;
+      font-size: 18px;
+      color: #18352a;
+    }
+
+    .word-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid #e5ebe6;
+      border-radius: 15px;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(20, 70, 45, 0.05);
+    }
+
+    .word-number {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e8f6ee;
+      color: #087443;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .word-info {
+      flex: 1;
+    }
+
+    .arabic-word {
+      direction: rtl;
+      text-align: right;
+      color: #0b5d3b;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .pronunciation {
+      color: #5c7166;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .meaning {
+      color: #18352a;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .speak-button {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      background: #edf6ff;
+      color: #15608c;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .practice-box {
+      margin-top: 24px;
+      padding: 18px;
+      text-align: center;
+      border-radius: 18px;
+      background: #fffdf5;
+      border: 1px solid #e7d9a8;
+    }
+
+    .practice-box h3 {
+      color: #765900;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .practice-box p {
+      color: #736c54;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .practice-button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 11px;
+      background: #a87c00;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <header class="header">
+      <button class="back-button" onclick="window.location.href='index.html'">←</button>
+
+      <div>
+        <h1>শব্দভান্ডার</h1>
+        <p>كَلِمَاتٌ عَرَبِيَّةٌ</p>
+      </div>
+    </header>
+
+    <section class="content">
+
+      <div class="intro">
+        <h2>আজকের প্রয়োজনীয় শব্দ</h2>
+        <p>
+          প্রতিদিন কয়েকটি নতুন আরবি শব্দ শিখুন।
+          শব্দের ওপর নিয়মিত অনুশীলন করলে আরবিতে কথা বলা সহজ হবে।
+        </p>
+      </div>
+
+      <h2 class="category-title">সালাম ও পরিচয়</h2>
+
+      <div class="word-card">
+        <div class="word-number">১</div>
+
+        <div class="word-info">
+          <div class="arabic-word">سَلَام</div>
+          <div class="pronunciation">উচ্চারণ: সালাম</div>
+          <div class="meaning">অর্থ: শান্তি</div>
+        </div>
+
+        <button class="speak-button" onclick="speakWord('سَلَام')">🔊</button>
+      </div>
+
+      <div class="word-card">
+        <div class="word-number">২</div>
+
+        <div class="word-info">
+          <div class="arabic-word">أَنَا</div>
+          <div class="pronunciation">উচ্চারণ: আনা</div>
+          <div class="meaning">অর্থ: আমি</div>
+        </div>
+
+        <button class="speak-button" onclick="speakWord('أَنَا')">🔊</button>
+      </div>
+
+      <div class="word-card">
+        <div class="word-number">৩</div>
+
+        <div class="word-info">
+          <div class="arabic-word">اِسْم</div>
+          <div class="pronunciation">উচ্চারণ: ইসম</div>
+          <div class="meaning">অর্থ: নাম</div>
+        </div>
+
+        <button class="speak-button" onclick="speakWord('اِسْم')">🔊</button>
+      </div>
+
+      <div class="word-card">
+        <div class="word-number">৪</div>
+
+        <div class="word-info">
+          <div class="arabic-word">طَالِب</div>
+          <div class="pronunciation">উচ্চারণ: ত্বালিব</div>
+          <div class="meaning">অর্থ: ছাত্র</div>
+        </div>
+
+        <button class="speak-button" onclick="speakWord('طَالِب')">🔊</button>
+      </div>
+
+      <div class="word-card">
+        <div class="word-number">৫</div>
+
+        <div class="word-info">
+          <div class="arabic-word">طَالِبَة</div>
+          <div class="pronunciation">উচ্চারণ: ত্বালিবাহ</div>
+          <div class="meaning">অর্থ: ছাত্রী</div>
+        </div>
+
+        <button class="speak-button" onclick="speakWord('طَالِبَة')">🔊</button>
+      </div>
+
+      <h2 class="category-title">দৈনন্দিন শব্দ</h2>
+
+      <div class="word-card">
+        <div class="word-number">৬</div>
+
+        <div class="word-info">
+          <div class="arabic-word">كِتَاب</div>
+          <div class="pronunciation">উচ্চারণ: কিতাব</div>
+          <div class="meaning">অর্থ: বই</div>
+        </div>
+
+        <button class="speak-button" onclick="speakWord('كِتَاب')">🔊</button>
+      </div>
+
+      <div class="word-card">
+        <div class="word-number">৭</div>
+
+        <div class="word-info">
+          <div class="arabic-word">قَلَم</div>
+          <div class="pronunciation">উচ্চারণ: কলম</div>
+          <div class="meaning">অর্থ: কলম</div>
+        </div>
+
+        <button class="speak-button" onclick="speakWord('قَلَم')">🔊</button>
+      </div>
+
+      <div class="word-card">
+        <div class="word-number">৮</div>
+
+        <div class="word-info">
+          <div class="arabic-word">بَيْت</div>
+          <div class="pronunciation">উচ্চারণ: বাইত</div>
+          <div class="meaning">অর্থ: বাড়ি</div>
+        </div>
+
+        <button class="speak-button" onclick="speakWord('بَيْت')">🔊</button>
+      </div>
+
+      <section class="practice-box">
+        <h3>আজকের অনুশীলন</h3>
+        <p>
+          শব্দগুলো কয়েকবার পড়ুন এবং উচ্চারণ শুনুন।
+          পরে কুইজ দিয়ে নিজের শেখা যাচাই করুন।
+        </p>
+
+        <button class="practice-button" onclick="alert('কুইজ পেজটি পরের ধাপে তৈরি করা হবে, ইনশাআল্লাহ।')">
+          শব্দভান্ডার কুইজ দিন
+        </button>
+      </section>
+
+    </section>
+  </main>
+
+  <script>
+    function speakWord(word) {
+      if ("speechSynthesis" in window) {
+        const speech = new SpeechSynthesisUtterance(word);
+        speech.lang = "ar-SA";
+        speech.rate = 0.75;
+        window.speechSynthesis.speak(speech);
+      } else {
+        alert("আপনার browser-এ উচ্চারণ সুবিধাটি পাওয়া যাচ্ছে না।");
+      }
+    }
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js");
+      });
+    }
+  </script>
+</body>
+</html>

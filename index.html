@@ -23,6 +23,10 @@
       color: #18352a;
     }
 
+    button {
+      font-family: inherit;
+    }
+
     .app {
       max-width: 520px;
       min-height: 100vh;
@@ -78,16 +82,68 @@
     .daily-arabic {
       direction: rtl;
       text-align: right;
-      font-size: 22px;
+      font-size: 25px;
       font-weight: bold;
       color: #163f2d;
-      margin-bottom: 8px;
+      margin: 12px 0 8px;
+      line-height: 1.8;
     }
 
     .meaning {
       color: #52635b;
       font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .speak-button {
+      width: 100%;
+      margin-top: 14px;
+      padding: 12px;
+      border: none;
+      border-radius: 11px;
+      background: #e3f3e9;
+      color: #075b34;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .speak-button:active {
+      transform: scale(0.98);
+    }
+
+    .start-card {
+      margin: 0 16px 18px;
+      padding: 19px;
+      border-radius: 18px;
+      background: #e8f6ee;
+      border: 1px solid #b8e0c7;
+    }
+
+    .start-card h2 {
+      color: #075b34;
+      font-size: 18px;
+      margin-bottom: 7px;
+    }
+
+    .start-card p {
+      color: #476158;
+      font-size: 14px;
       line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .start-button {
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 11px;
+      padding: 13px;
+      background: #087443;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     .section {
@@ -210,8 +266,9 @@
   <main class="app">
 
     <section class="hero">
-      <div class="arabic-title">لِسَانُ العَرَبِيَّة</div>
+      <div class="arabic-title" lang="ar">لِسَانُ العَرَبِيَّة</div>
       <div class="english-title">LISĀN AL-ʿARABIYYAH</div>
+
       <p class="tagline">
         আরবি শিখুন • আরবিতে কথা বলুন<br />
         AI-এর সঙ্গে অনুশীলন করুন
@@ -221,12 +278,37 @@
     <section class="daily-card">
       <div class="small-title">আজকের আরবি বাক্য</div>
 
-      <div class="daily-arabic">اَلسَّلَامُ عَلَيْكُمْ</div>
+      <div class="daily-arabic" lang="ar">
+        اَلسَّلَامُ عَلَيْكُمْ
+      </div>
 
       <p class="meaning">
         উচ্চারণ: আস-সালামু আলাইকুম<br />
         অর্থ: আপনার ওপর শান্তি বর্ষিত হোক।
       </p>
+
+      <button
+        class="speak-button"
+        onclick="speakArabic('اَلسَّلَامُ عَلَيْكُمْ')"
+      >
+        🔊 আরবি উচ্চারণ শুনুন
+      </button>
+    </section>
+
+    <section class="start-card">
+      <h2>📘 আজকের পাঠ শুরু করুন</h2>
+
+      <p>
+        পাঠ ১: সালাম ও পরিচয়।<br />
+        সহজ আরবি কথোপকথন শিখুন এবং AI-এর সঙ্গে অনুশীলন করুন।
+      </p>
+
+      <button
+        class="start-button"
+        onclick="window.location.href='lessons.html'"
+      >
+        পাঠ ১ শুরু করুন
+      </button>
     </section>
 
     <section class="section">
@@ -237,19 +319,19 @@
         <div class="card" onclick="window.location.href='lessons.html'">
           <div class="icon">📚</div>
           <h3>আরবি পাঠ</h3>
-          <p>বর্ণ, শব্দ, বাক্য ও ব্যাকরণ শিখুন</p>
+          <p>সহজ থেকে কঠিন কথোপকথন শিখুন</p>
         </div>
 
         <div class="card" onclick="window.location.href='vocabulary.html'">
           <div class="icon">🔤</div>
           <h3>শব্দভান্ডার</h3>
-          <p>প্রয়োজনীয় আরবি শব্দ ও বাংলা অর্থ শিখুন</p>
+          <p>প্রয়োজনীয় আরবি শব্দ ও অর্থ শিখুন</p>
         </div>
 
         <div class="card" onclick="window.location.href='quiz.html'">
           <div class="icon">📝</div>
           <h3>কুইজ</h3>
-          <p>প্রশ্নের উত্তর দিয়ে নিজের জ্ঞান যাচাই করুন</p>
+          <p>প্রশ্নের উত্তর দিয়ে অনুশীলন করুন</p>
         </div>
 
         <div class="card" onclick="window.location.href='chat.html'">
@@ -261,13 +343,13 @@
         <div class="card" onclick="window.location.href='profile.html'">
           <div class="icon">📈</div>
           <h3>আমার অগ্রগতি</h3>
-          <p>পড়ার সময়, স্কোর ও শেখার দিন দেখুন</p>
+          <p>শেখা পাঠ, শব্দ ও কুইজ স্কোর দেখুন</p>
         </div>
 
         <div class="card" onclick="window.location.href='settings.html'">
           <div class="icon">⚙️</div>
           <h3>সেটিংস</h3>
-          <p>Theme ও পড়ার reminder নিয়ন্ত্রণ করুন</p>
+          <p>Theme ও reminder নিয়ন্ত্রণ করুন</p>
         </div>
 
       </div>
@@ -277,8 +359,8 @@
       <h3>🤖 AI আরবি শিক্ষক</h3>
 
       <p>
-        আরবিতে লিখুন বা বলুন। শিক্ষক আপনার ভুল সংশোধন করবে,
-        আরবিতে উত্তর দেবে এবং বাংলায় সহজ ব্যাখ্যা করবে।
+        আরবিতে লিখুন বা বলুন। AI আপনার ভুল ঠিক করবে,
+        শুদ্ধ বাক্য দেখাবে এবং সহজ বাংলায় বুঝিয়ে দেবে।
       </p>
 
       <button class="ai-button" onclick="window.location.href='chat.html'">
@@ -310,14 +392,58 @@
 
   </main>
 
-  <script src="app.js"></script>
-
   <script>
+    let arabicVoices = [];
+
+    function loadArabicVoices() {
+      const voices = window.speechSynthesis.getVoices();
+
+      arabicVoices = voices.filter(function (voice) {
+        return voice.lang.toLowerCase().startsWith("ar");
+      });
+    }
+
+    if ("speechSynthesis" in window) {
+      loadArabicVoices();
+      window.speechSynthesis.onvoiceschanged = loadArabicVoices;
+    }
+
+    function speakArabic(text) {
+      if (!("speechSynthesis" in window)) {
+        alert("এই browser-এ আরবি উচ্চারণ শোনানো যাচ্ছে না।");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const speech = new SpeechSynthesisUtterance(text);
+
+      speech.lang = "ar-SA";
+      speech.rate = 0.7;
+      speech.pitch = 1;
+      speech.volume = 1;
+
+      const arabicVoice =
+        arabicVoices.find(function (voice) {
+          return voice.lang === "ar-SA";
+        }) ||
+        arabicVoices.find(function (voice) {
+          return voice.lang.startsWith("ar");
+        });
+
+      if (arabicVoice) {
+        speech.voice = arabicVoice;
+      }
+
+      window.speechSynthesis.speak(speech);
+    }
+
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("service-worker.js");
       });
     }
   </script>
+
 </body>
 </html>

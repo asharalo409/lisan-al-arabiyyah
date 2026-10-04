@@ -3,9 +3,24 @@
   "short_name": "Lisan Arabic",
   "description": "আরবি ভাষা শেখা ও AI-এর সঙ্গে আরবিতে কথোপকথনের অ্যাপ",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#F6F7F2",
   "theme_color": "#0B5D3B",
+  "orientation": "portrait-primary",
   "lang": "bn",
-  "dir": "rtl"
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
 }

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আরবি পাঠ ১–৫</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f7f3;
+      color: #183b2c;
+    }
+
+    .app {
+      max-width: 520px;
+      min-height: 100vh;
+      margin: auto;
+      padding-bottom: 25px;
+      background: white;
+    }
+
+    header {
+      padding: 22px 18px;
+      color: white;
+      background: linear-gradient(135deg, #075b34, #138555);
+      border-radius: 0 0 25px 25px;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    header h1 {
+      margin: 17px 0 6px;
+      font-size: 25px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    #menu {
+      padding: 16px;
+    }
+
+    .lesson-button {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 19px;
+      color: #075b34;
+      background: #e8f6ee;
+      border: 1px solid #b8dfc7;
+      border-radius: 15px;
+      text-align: left;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    #lessonPage {
+      display: none;
+      padding: 16px;
+    }
+
+    .back-button {
+      padding: 10px 14px;
+      color: white;
+      background: #087443;
+      border: 0;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    #lessonTitle {
+      margin: 18px 0 8px;
+      color: #075b34;
+      font-size: 27px;
+    }
+
+    .info {
+      margin-bottom: 18px;
+      color: #64796e;
+      font-size: 14px;
+    }
+
+    .line {
+      margin-bottom: 14px;
+      padding: 18px;
+      background: #f0f9f3;
+      border: 1px solid #d1ead9;
+      border-radius: 13px;
+    }
+
+    .arabic {
+      color: #075b34;
+      font-size: 27px;
+      line-height: 1.9;
+      text-align: right;
+      direction: rtl;
+    }
+
+    .bangla {
+      margin-top: 8px;
+      color: #4d6258;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .listen {
+      margin-top: 12px;
+      padding: 10px 13px;
+      color: #075b34;
+      background: #d3f0df;
+      border: 0;
+      border-radius: 9px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .practice {
+      margin-top: 20px;
+      padding: 18px;
+      text-align: center;
+      background: #fff6d7;
+      border: 1px solid #ebd57f;
+      border-radius: 15px;
+    }
+
+    .practice button {
+      padding: 12px 16px;
+      color: white;
+      background: #087443;
+      border: 0;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <header>
+      <a href="lessons.html">← সব পাঠে ফিরে যান</a>
+      <h1>আরবি পাঠ ১–৫</h1>
+      <p>প্রতি পাঠে ২০টি দৈনন্দিন আরবি বাক্য</p>
+    </header>
+
+    <section id="menu"></section>
+
+    <section id="lessonPage">
+      <button class="back-button" onclick="showMenu()">← পাঠের তালিকা</button>
+
+      <h2 id="lessonTitle"></h2>
+
+      <p class="info">আরবি বাক্যে চাপ দিয়ে শুনুন ও অনুশীলন করুন।</p>
+
+      <div id="lessonLines"></div>
+
+      <div class="practice">
+        <h3>🤖 AI স্যারের সঙ্গে অনুশীলন</h3>
+        <p>এই পাঠের বাক্য AI স্যারকে বলে অনুশীলন করুন।</p>
+        <button onclick="window.location.href='chat.html'">
+          অনুশীলন শুরু করুন
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const lessons = [
+
+      {
+        title: "পাঠ ১: সালাম ও পরিচয়",
+        lines: [
+          ["السلام عليكم", "আসসালামু আলাইকুম।"],
+          ["وعليكم السلام", "ওয়া আলাইকুমুস সালাম।"],
+          ["كيف حالك؟", "আপনি কেমন আছেন?"],
+          ["أنا بخير", "আমি ভালো আছি।"],
+          ["الحمد لله", "আলহামদুলিল্লাহ।"],
+          ["ما اسمك؟", "আপনার নাম কী?"],
+          ["اسمي أحمد", "আমার নাম আহমদ।"],
+          ["من أين أنت؟", "আপনি কোথা থেকে এসেছেন?"],
+          ["أنا من بنغلاديش", "আমি বাংলাদেশ থেকে এসেছি।"],
+          ["تشرفت بلقائك", "আপনার সঙ্গে পরিচিত হয়ে ভালো লাগল।"],
+          ["أهلاً وسهلاً", "স্বাগতম।"],
+          ["صباح الخير", "সুপ্রভাত।"],
+          ["مساء الخير", "শুভ সন্ধ্যা।"],
+          ["كيف يومك؟", "আপনার দিন কেমন যাচ্ছে?"],
+          ["يومي جيد", "আমার দিন ভালো যাচ্ছে।"],
+          ["إلى اللقاء", "আবার দেখা হবে।"],
+          ["مع السلامة", "বিদায়।"],
+          ["شكراً", "ধন্যবাদ।"],
+          ["عفواً", "স্বাগতম / সমস্যা নেই।"],
+          ["بارك الله فيك", "আল্লাহ আপনাকে বরকত দিন।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ২: কেমন আছেন",
+        lines: [
+          ["كيف حالك اليوم؟", "আজ আপনি কেমন আছেন?"],
+          ["أنا بخير الحمد لله", "আমি ভালো আছি, আলহামদুলিল্লাহ।"],
+          ["هل أنت بخير؟", "আপনি কি ভালো আছেন?"],
+          ["نعم، أنا بخير", "হ্যাঁ, আমি ভালো আছি।"],
+          ["أنا سعيد", "আমি খুশি। ছেলে বলবে।"],
+          ["أنا سعيدة", "আমি খুশি। মেয়ে বলবে।"],
+          ["أنا متعب", "আমি ক্লান্ত। ছেলে বলবে।"],
+          ["أنا متعبة", "আমি ক্লান্ত। মেয়ে বলবে।"],
+          ["أنا مريض", "আমি অসুস্থ। ছেলে বলবে।"],
+          ["أنا مريضة", "আমি অসুস্থ। মেয়ে বলবে।"],
+          ["لا تقلق", "চিন্তা করবেন না।"],
+          ["أنا بخير الآن", "আমি এখন ভালো আছি।"],
+          ["أشعر بالتعب", "আমি ক্লান্ত অনুভব করছি।"],
+          ["أشعر بالسعادة", "আমি আনন্দ অনুভব করছি।"],
+          ["أنا مشغول اليوم", "আমি আজ ব্যস্ত। ছেলে বলবে।"],
+          ["أنا مشغولة اليوم", "আমি আজ ব্যস্ত। মেয়ে বলবে।"],
+          ["أنا بخير جداً", "আমি খুব ভালো আছি।"],
+          ["أتمنى لك يوماً سعيداً", "আমি আপনার সুন্দর দিন কামনা করি।"],
+          ["شكراً لسؤالك", "জিজ্ঞেস করার জন্য ধন্যবাদ।"],
+          ["الله يحفظك", "আল্লাহ আপনাকে হেফাজত করুন।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ৩: নিজের পরিচয়",
+        lines: [
+          ["ما اسمك؟", "আপনার নাম কী?"],
+          ["اسمي محمد", "আমার নাম মুহাম্মদ।"],
+          ["اسمي فاطمة", "আমার নাম ফাতিমা।"],
+          ["من أين أنت؟", "আপনি কোথা থেকে এসেছেন?"],
+          ["أنا من بنغلاديش", "আমি বাংলাদেশ থেকে এসেছি।"],
+          ["أنا بنغلاديشي", "আমি বাংলাদেশি। ছেলে বলবে।"],
+          ["أنا بنغلاديشية", "আমি বাংলাদেশি। মেয়ে বলবে।"],
+          ["كم عمرك؟", "আপনার বয়স কত?"],
+          ["عمري عشرون سنة", "আমার বয়স বিশ বছর।"],
+          ["أنا طالب", "আমি একজন ছাত্র।"],
+          ["أنا طالبة", "আমি একজন ছাত্রী।"],
+          ["أنا مسلم", "আমি মুসলিম। ছেলে বলবে।"],
+          ["أنا مسلمة", "আমি মুসলিম। মেয়ে বলবে।"],
+          ["أنا أتعلم العربية", "আমি আরবি শিখছি।"],
+          ["هل تتكلم العربية؟", "আপনি কি আরবি বলেন?"],
+          ["نعم، أتكلم العربية قليلاً", "হ্যাঁ, আমি অল্প আরবি বলি।"],
+          ["لا أتكلم العربية جيداً", "আমি আরবি ভালো বলতে পারি না।"],
+          ["أنا أحب اللغة العربية", "আমি আরবি ভাষা ভালোবাসি।"],
+          ["أنا سعيد بلقائك", "আপনার সঙ্গে দেখা হয়ে আমি খুশি। ছেলে বলবে।"],
+          ["أنا سعيدة بلقائك", "আপনার সঙ্গে দেখা হয়ে আমি খুশি। মেয়ে বলবে।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ৪: পরিবার পরিচয়",
+        lines: [
+          ["هذه عائلتي", "এটি আমার পরিবার।"],
+          ["من هذا؟", "ইনি কে?"],
+          ["هذا أبي", "ইনি আমার বাবা।"],
+          ["هذه أمي", "ইনি আমার মা।"],
+          ["هذا أخي", "ইনি আমার ভাই।"],
+          ["هذه أختي", "ইনি আমার বোন।"],
+          ["هذا جدي", "ইনি আমার দাদা / নানা।"],
+          ["هذه جدتي", "ইনি আমার দাদি / নানি।"],
+          ["هل لديك أخ؟", "আপনার কি ভাই আছে?"],
+          ["نعم، لدي أخ", "হ্যাঁ, আমার ভাই আছে।"],
+          ["هل لديك أخت؟", "আপনার কি বোন আছে?"],
+          ["نعم، لدي أخت", "হ্যাঁ, আমার বোন আছে।"],
+          ["كم عدد أفراد عائلتك؟", "আপনার পরিবারে কতজন সদস্য?"],
+          ["عائلتي كبيرة", "আমার পরিবার বড়।"],
+          ["عائلتي صغيرة", "আমার পরিবার ছোট।"],
+          ["أبي يعمل مدرساً", "আমার বাবা শিক্ষক হিসেবে কাজ করেন।"],
+          ["أمي ربة بيت", "আমার মা গৃহিণী।"],
+          ["أخي طالب", "আমার ভাই ছাত্র।"],
+          ["أختي طالبة", "আমার বোন ছাত্রী।"],
+          ["أنا أحب عائلتي", "আমি আমার পরিবারকে ভালোবাসি।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ৫: বাসা ও ঘর",
+        lines: [
+          ["أين بيتك؟", "আপনার বাসা কোথায়?"],
+          ["بيتي قريب", "আমার বাসা কাছে।"],
+          ["بيتي بعيد", "আমার বাসা দূরে।"],
+          ["هذا بيتي", "এটি আমার বাসা।"],
+          ["بيتي كبير", "আমার বাসা বড়।"],
+          ["بيتي صغير", "আমার বাসা ছোট।"],
+          ["كم غرفة في بيتك؟", "আপনার বাসায় কয়টি ঘর আছে?"],
+          ["في بيتي ثلاث غرف", "আমার বাসায় তিনটি ঘর আছে।"],
+          ["هذه غرفتي", "এটি আমার ঘর।"],
+          ["هذه غرفة النوم", "এটি শোবার ঘর।"],
+          ["هذا المطبخ", "এটি রান্নাঘর।"],
+          ["هذه الحمام", "এটি বাথরুম।"],
+          ["هذا الباب", "এটি দরজা।"],
+          ["هذه النافذة", "এটি জানালা।"],
+          ["أين المفتاح؟", "চাবি কোথায়?"],
+          ["المفتاح على الطاولة", "চাবি টেবিলের ওপর আছে।"],
+          ["افتح الباب", "দরজা খোলুন।"],
+          ["أغلق الباب", "দরজা বন্ধ করুন।"],
+          ["ادخل إلى البيت", "বাসার ভেতরে আসুন।"],
+          ["البيت نظيف", "বাসাটি পরিষ্কার।"]
+        ]
+      }
+
+    ];
+
+    function showMenu() {
+      document.getElementById("menu").style.display = "block";
+      document.getElementById("lessonPage").style.display = "none";
+    }
+
+    function openLesson(index) {
+      const lesson = lessons[index];
+
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("lessonPage").style.display = "block";
+
+      document.getElementById("lessonTitle").textContent = lesson.title;
+
+      const lessonLines = document.getElementById("lessonLines");
+      lessonLines.innerHTML = "";
+
+      for (let i = 0; i < lesson.lines.length; i++) {
+        const box = document.createElement("div");
+        box.className = "line";
+
+        const arabic = document.createElement("div");
+        arabic.className = "arabic";
+        arabic.textContent = (i + 1) + ". " + lesson.lines[i][0];
+
+        const bangla = document.createElement("div");
+        bangla.className = "bangla";
+        bangla.textContent = lesson.lines[i][1];
+
+        const button = document.createElement("button");
+        button.className = "listen";
+        button.textContent = "🔊 শুনুন";
+
+        button.onclick = function () {
+          speakArabic(lesson.lines[i][0]);
+        };
+
+        box.appendChild(arabic);
+        box.appendChild(bangla);
+        box.appendChild(button);
+
+        lessonLines.appendChild(box);
+      }
+
+      window.scrollTo(0, 0);
+    }
+
+    function speakArabic(text) {
+      window.speechSynthesis.cancel();
+
+      const speech = new SpeechSynthesisUtterance(text);
+
+      speech.lang = "ar-SA";
+      speech.rate = 0.75;
+
+      window.speechSynthesis.speak(speech);
+    }
+
+    function createMenu() {
+      const menu = document.getElementById("menu");
+
+      for (let i = 0; i < lessons.length; i++) {
+        const button = document.createElement("button");
+
+        button.className = "lesson-button";
+        button.textContent = lessons[i].title;
+
+        button.onclick = function () {
+          openLesson(i);
+        };
+
+        menu.appendChild(button);
+      }
+    }
+
+    createMenu();
+  </script>
+</body>
+</html>

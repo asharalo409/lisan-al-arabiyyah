@@ -1,24 +1,40 @@
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Only POST allowed" });
+    return res.status(405).json({
+      error: "Only POST allowed"
+    });
   }
 
   try {
-    const message = req.body.message;
+    const message = req.body.message || "";
+
+    if (!message) {
+      return res.status(400).json({
+        error: "কোনো কথা পাওয়া যায়নি।"
+      });
+    }
 
     const prompt = `
-তুমি একজন সহজ আরবি শিক্ষক।
+তুমি "لِسَانُ العَرَبِيَّة" অ্যাপের আরবি শিক্ষক রোবট।
 
-শিক্ষার্থীর কথা:
+শিক্ষার্থী বাংলা ভাষাভাষী।
+সে সহজ থেকে কঠিন আরবি কথোপকথন শিখছে।
+
+শিক্ষার্থীর লেখা বা বলা কথা:
 ${message}
 
-এই format-এ উত্তর দাও:
+তুমি অবশ্যই নিচের তিনটি line-এ উত্তর দেবে:
 
-ARABIC: শুদ্ধ ও সহজ আরবি উত্তর
-BANGLA: সহজ বাংলায় ব্যাখ্যা
-CORRECTION: ভুল থাকলে শুদ্ধ বাক্য ও কারণ। ভুল না থাকলে খালি রাখো।
+ARABIC: শুদ্ধ, সহজ এবং ছোট আরবি উত্তর।
+BANGLA: বাংলায় খুব সহজ অর্থ বা ব্যাখ্যা।
+CORRECTION: শিক্ষার্থীর ভুল থাকলে শুদ্ধ বাক্য ও ছোট কারণ। ভুল না থাকলে লিখবে: ভালো বলেছেন।
 
-ছোট উত্তর দেবে এবং শিক্ষার্থীকে আরবিতে আবার উত্তর দিতে বলবে।
+নিয়ম:
+- আরবিতে শিক্ষকের মতো কথা বলবে।
+- শিক্ষার্থী ভুল করলে ভদ্রভাবে সংশোধন করবে।
+- একবারে ছোট উত্তর দেবে।
+- কঠিন আরবি শব্দ কম ব্যবহার করবে।
+- শেষে শিক্ষার্থীকে একটি সহজ আরবি প্রশ্ন করবে।
 `;
 
     const response = await fetch(
@@ -45,10 +61,20 @@ CORRECTION: ভুল থাকলে শুদ্ধ বাক্য ও কা
       });
     }
 
-    const outputs = result.outputs || [];
-    const outputText = outputs.length
-      ? outputs[outputs.length - 1].text || ""
-      : "";
+    const outputSteps = (result.steps || []).filter(function (step) {
+      return step.type === "model_output";
+    });
+
+    const outputText = outputSteps
+      .flatMap(function (step) {
+        return step.content || [];
+      })
+      .map(function (item) {
+        return item.text || "";
+      })
+      .join("
+")
+      .trim();
 
     const arabicMatch = outputText.match(
       /ARABIC:s*([sS]*?)(?=
@@ -64,23 +90,27 @@ CORRECTION:|$)/i
       /CORRECTION:s*([sS]*)/i
     );
 
+    const arabic = arabicMatch
+      ? arabicMatch[1].trim()
+      : outputText || "أَحْسَنْتَ، تَابِعْ.";
+
+    const bangla = banglaMatch
+      ? banglaMatch[1].trim()
+      : "AI শিক্ষক আপনার কথার উত্তর দিয়েছে।";
+
+    const correction = correctionMatch
+      ? correctionMatch[1].trim()
+      : "ভালো চেষ্টা করেছেন।";
+
     return res.status(200).json({
-      arabic: arabicMatch
-        ? arabicMatch[1].trim()
-        : "أَحْسَنْتَ، تَابِعْ.",
-
-      bangla: banglaMatch
-        ? banglaMatch[1].trim()
-        : "ভালো চেষ্টা করেছেন। আরবিতে আবার বলুন।",
-
-      correction: correctionMatch
-        ? correctionMatch[1].trim()
-        : ""
+      arabic: arabic,
+      bangla: bangla,
+      correction: correction
     });
 
   } catch (error) {
     return res.status(500).json({
-      error: error.message
+      error: error.message || "AI শিক্ষক এখন উত্তর দিতে পারছে না।"
     });
   }
 };

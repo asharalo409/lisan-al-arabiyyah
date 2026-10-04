@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>আরবি পাঠ | لِسَانُ العَرَبِيَّة</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0B5D3B" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: #f6f7f2;
+      color: #18352a;
+    }
+
+    .app {
+      max-width: 520px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #ffffff;
+      padding-bottom: 30px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0b5d3b, #15835a);
+      color: white;
+      padding: 18px 16px;
+    }
+
+    .back-button {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .header h1 {
+      font-size: 20px;
+    }
+
+    .header p {
+      margin-top: 3px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 18px 16px;
+    }
+
+    .progress-box {
+      padding: 16px;
+      border-radius: 16px;
+      background: #e8f6ee;
+      border: 1px solid #b8e0c7;
+      margin-bottom: 20px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #075b34;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 9px;
+      background: #ccebd7;
+      border-radius: 50px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 10%;
+      height: 100%;
+      background: #087443;
+      border-radius: 50px;
+    }
+
+    .section-title {
+      margin: 20px 0 12px;
+      font-size: 19px;
+      color: #18352a;
+    }
+
+    .lesson-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      margin-bottom: 12px;
+      background: white;
+      border: 1px solid #e5ebe6;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(20, 70, 45, 0.06);
+    }
+
+    .lesson-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #e8f6ee;
+      color: #087443;
+      font-weight: bold;
+    }
+
+    .lesson-info {
+      flex: 1;
+    }
+
+    .lesson-info h3 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .lesson-info p {
+      color: #6e7e75;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .arrow {
+      font-size: 24px;
+      color: #087443;
+    }
+
+    .active-lesson {
+      border: 2px solid #168354;
+      background: #f6fff9;
+    }
+
+    .lesson-box {
+      padding: 20px 16px;
+      border-radius: 18px;
+      background: #fffdf5;
+      border: 1px solid #e7d9a8;
+      margin-top: 20px;
+    }
+
+    .lesson-label {
+      color: #9a7200;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .arabic-text {
+      direction: rtl;
+      text-align: right;
+      color: #0b5d3b;
+      font-size: 29px;
+      font-weight: bold;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .pronunciation,
+    .translation {
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 11px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pronunciation {
+      background: #edf6ff;
+      color: #24526d;
+    }
+
+    .translation {
+      background: #e8f6ee;
+      color: #24583e;
+    }
+
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .word-card {
+      padding: 13px 10px;
+      text-align: center;
+      border: 1px solid #e5ebe6;
+      border-radius: 13px;
+      background: white;
+    }
+
+    .word-arabic {
+      direction: rtl;
+      font-size: 21px;
+      font-weight: bold;
+      color: #0b5d3b;
+      margin-bottom: 5px;
+    }
+
+    .word-bangla {
+      color: #6e7e75;
+      font-size: 12px;
+    }
+
+    .complete-button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #087443;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <header class="header">
+      <button class="back-button" onclick="window.location.href='index.html'">←</button>
+
+      <div>
+        <h1>আরবি পাঠ</h1>
+        <p>لِسَانُ العَرَبِيَّة</p>
+      </div>
+    </header>
+
+    <section class="content">
+
+      <div class="progress-box">
+        <div class="progress-top">
+          <span>আপনার শেখার অগ্রগতি</span>
+          <span>১ / ১০ পাঠ</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <h2 class="section-title">পাঠসমূহ</h2>
+
+      <div class="lesson-card active-lesson">
+        <div class="lesson-number">১</div>
+
+        <div class="lesson-info">
+          <h3>সালাম ও পরিচয়</h3>
+          <p>আরবিতে সালাম দেওয়া এবং সহজ পরিচয় শেখুন</p>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-number">২</div>
+
+        <div class="lesson-info">
+          <h3>আরবি বর্ণমালা</h3>
+          <p>ا থেকে ي পর্যন্ত আরবি অক্ষর চিনুন</p>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-number">৩</div>
+
+        <div class="lesson-info">
+          <h3>নিজের পরিচয়</h3>
+          <p>নাম, দেশ ও শিক্ষার কথা আরবিতে বলুন</p>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-number">৪</div>
+
+        <div class="lesson-info">
+          <h3>দৈনন্দিন কথোপকথন</h3>
+          <p>প্রতিদিনের প্রয়োজনীয় আরবি বাক্য শিখুন</p>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+
+      <section class="lesson-box">
+        <div class="lesson-label">পাঠ ১: সালাম ও পরিচয়</div>
+
+        <div class="arabic-text">اَلسَّلَامُ عَلَيْكُمْ</div>
+
+        <div class="pronunciation">
+          <strong>উচ্চারণ:</strong> আস-সালামু আলাইকুম
+        </div>
+
+        <div class="translation">
+          <strong>বাংলা অর্থ:</strong> আপনার ওপর শান্তি বর্ষিত হোক।
+        </div>
+
+        <h2 class="section-title">আজকের শব্দভান্ডার</h2>
+
+        <div class="word-grid">
+          <div class="word-card">
+            <div class="word-arabic">سَلَام</div>
+            <div class="word-bangla">শান্তি</div>
+          </div>
+
+          <div class="word-card">
+            <div class="word-arabic">عَلَيْكُمْ</div>
+            <div class="word-bangla">তোমাদের/আপনাদের ওপর</div>
+          </div>
+
+          <div class="word-card">
+            <div class="word-arabic">أَنَا</div>
+            <div class="word-bangla">আমি</div>
+          </div>
+
+          <div class="word-card">
+            <div class="word-arabic">طَالِب</div>
+            <div class="word-bangla">ছাত্র</div>
+          </div>
+        </div>
+
+        <button class="complete-button" onclick="completeLesson()">
+          ✓ পাঠটি সম্পন্ন করেছি
+        </button>
+      </section>
+
+    </section>
+  </main>
+
+  <script>
+    function completeLesson() {
+      alert("মাশাআল্লাহ! আপনি পাঠ ১ সম্পন্ন করেছেন।");
+    }
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js");
+      });
+    }
+  </script>
+</body>
+</html>

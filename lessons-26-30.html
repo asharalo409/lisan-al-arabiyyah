@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আরবি পাঠ ২৬–৩০</title>
+
+  <style>
+    body{margin:0;font-family:Arial;background:#f2f7f3}
+    .app{max-width:520px;margin:auto;background:white;min-height:100vh}
+    header{padding:22px 18px;background:#087443;color:white;border-radius:0 0 25px 25px}
+    header a{color:white;text-decoration:none}
+    #menu,#page{padding:16px}
+    #page{display:none}
+    .lesson{width:100%;margin-bottom:12px;padding:19px;background:#e8f6ee;color:#075b34;border:1px solid #b8dfc7;border-radius:15px;text-align:left;font-size:19px;font-weight:bold}
+    .back{padding:10px;background:#087443;color:white;border:0;border-radius:9px}
+    .line{margin:13px 0;padding:17px;background:#f0f9f3;border:1px solid #d1ead9;border-radius:13px}
+    .ar{font-size:27px;color:#075b34;text-align:right;direction:rtl}
+    .bn{margin-top:8px;font-size:18px}
+    .listen{margin-top:10px;padding:9px;background:#d3f0df;color:#075b34;border:0;border-radius:8px}
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <header>
+      <a href="lessons.html">← সব পাঠে যান</a>
+      <h1>আরবি পাঠ ২৬–৩০</h1>
+      <p>প্রতি পাঠে ২০টি বাক্য</p>
+    </header>
+
+    <section id="menu"></section>
+
+    <section id="page">
+      <button class="back" onclick="back()">← পাঠের তালিকা</button>
+      <h2 id="title"></h2>
+      <div id="lines"></div>
+    </section>
+
+  </main>
+
+  <script>
+    const lessons = [
+
+      {
+        title: "পাঠ ২৬: মসজিদে কথাবার্তা",
+        lines: [
+          ["أين المسجد؟","মসজিদ কোথায়?"],
+          ["المسجد قريب","মসজিদ কাছে।"],
+          ["أريد أن أذهب إلى المسجد","আমি মসজিদে যেতে চাই।"],
+          ["متى الأذان؟","আজান কখন?"],
+          ["حان وقت الصلاة","নামাজের সময় হয়েছে।"],
+          ["هل توضأت؟","আপনি কি অজু করেছেন?"],
+          ["نعم، توضأت","হ্যাঁ, আমি অজু করেছি।"],
+          ["أين مكان الوضوء؟","অজুর স্থান কোথায়?"],
+          ["هذا مكان الوضوء","এটি অজুর স্থান।"],
+          ["صلِّ هنا","এখানে নামাজ পড়ুন।"],
+          ["الصف الأول هنا","প্রথম কাতার এখানে।"],
+          ["استووا","সারি সোজা করুন।"],
+          ["الإمام موجود","ইমাম উপস্থিত আছেন।"],
+          ["الصلاة تبدأ الآن","নামাজ এখন শুরু হচ্ছে।"],
+          ["الله أكبر","আল্লাহ মহান।"],
+          ["الحمد لله","আলহামদুলিল্লাহ।"],
+          ["السلام عليكم ورحمة الله","আসসালামু আলাইকুম ওয়া রহমাতুল্লাহ।"],
+          ["تقبل الله","আল্লাহ কবুল করুন।"],
+          ["ادع لي","আমার জন্য দোয়া করুন।"],
+          ["بارك الله فيك","আল্লাহ আপনাকে বরকত দিন।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ২৭: দোয়া ও ইসলামি কথা",
+        lines: [
+          ["بسم الله","আল্লাহর নামে শুরু করছি।"],
+          ["الحمد لله","সব প্রশংসা আল্লাহর জন্য।"],
+          ["إن شاء الله","আল্লাহ চাইলে।"],
+          ["ما شاء الله","আল্লাহ যা চেয়েছেন।"],
+          ["سبحان الله","আল্লাহ পবিত্র।"],
+          ["الله أكبر","আল্লাহ মহান।"],
+          ["أستغفر الله","আমি আল্লাহর কাছে ক্ষমা চাই।"],
+          ["لا حول ولا قوة إلا بالله","আল্লাহ ছাড়া কোনো শক্তি নেই।"],
+          ["جزاك الله خيراً","আল্লাহ আপনাকে উত্তম প্রতিদান দিন।"],
+          ["وإياك","আপনাকেও।"],
+          ["بارك الله فيك","আল্লাহ আপনাকে বরকত দিন।"],
+          ["حفظك الله","আল্লাহ আপনাকে হেফাজত করুন।"],
+          ["شفاك الله","আল্লাহ আপনাকে শিফা দিন।"],
+          ["رحمك الله","আল্লাহ আপনাকে রহম করুন।"],
+          ["تقبل الله منك","আল্লাহ আপনার আমল কবুল করুন।"],
+          ["ادع الله","আল্লাহর কাছে দোয়া করুন।"],
+          ["أنا مسلم","আমি মুসলিম। ছেলে বলবে।"],
+          ["أنا مسلمة","আমি মুসলিমা। মেয়ে বলবে।"],
+          ["أحب الله","আমি আল্লাহকে ভালোবাসি।"],
+          ["أحب رسول الله","আমি রাসুলুল্লাহকে ভালোবাসি।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ২৮: বন্ধুদের সঙ্গে কথা",
+        lines: [
+          ["كيف حالك يا صديقي؟","বন্ধু, তুমি কেমন আছ?"],
+          ["أنا بخير يا صديقي","আমি ভালো আছি, বন্ধু।"],
+          ["أين أنت؟","তুমি কোথায়?"],
+          ["أنا في البيت","আমি বাসায় আছি।"],
+          ["تعال إلى هنا","এখানে আসো।"],
+          ["أنا قادم","আমি আসছি। ছেলে বলবে।"],
+          ["أنا قادمة","আমি আসছি। মেয়ে বলবে।"],
+          ["انتظرني","আমার জন্য অপেক্ষা করো।"],
+          ["لا تتأخر","দেরি কোরো না।"],
+          ["ماذا تفعل؟","তুমি কী করছ?"],
+          ["أنا أدرس","আমি পড়ছি।"],
+          ["أنا أعمل","আমি কাজ করছি।"],
+          ["هل تريد أن نذهب؟","তুমি কি যেতে চাও?"],
+          ["نعم، هيا نذهب","হ্যাঁ, চল যাই।"],
+          ["إلى أين نذهب؟","আমরা কোথায় যাব?"],
+          ["نذهب إلى السوق","আমরা বাজারে যাই।"],
+          ["هذا جميل","এটি সুন্দর।"],
+          ["فكرة جيدة","ভালো ধারণা।"],
+          ["أنا سعيد برؤيتك","তোমাকে দেখে আমি খুশি। ছেলে বলবে।"],
+          ["أراك غداً","আগামীকাল দেখা হবে।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ২৯: দাওয়াত ও অতিথি",
+        lines: [
+          ["أهلاً وسهلاً","স্বাগতম।"],
+          ["تفضل بالدخول","ভেতরে আসুন।"],
+          ["اجلس من فضلك","অনুগ্রহ করে বসুন।"],
+          ["هل تريد شايًا؟","আপনি কি চা চান?"],
+          ["نعم، شكراً","হ্যাঁ, ধন্যবাদ।"],
+          ["هل تريد قهوة؟","আপনি কি কফি চান?"],
+          ["تفضل بالطعام","খাবার গ্রহণ করুন।"],
+          ["الطعام جاهز","খাবার প্রস্তুত।"],
+          ["هذا الطعام لذيذ","এই খাবার সুস্বাদু।"],
+          ["كل جيداً","ভালোভাবে খান।"],
+          ["هل تريد المزيد؟","আপনি কি আরও চান?"],
+          ["لا، شكراً","না, ধন্যবাদ।"],
+          ["بيتك جميل","আপনার বাসা সুন্দর।"],
+          ["شكراً لزيارتك","দেখতে আসার জন্য ধন্যবাদ।"],
+          ["شكراً على الدعوة","দাওয়াতের জন্য ধন্যবাদ।"],
+          ["نورت البيت","আপনি ঘর আলোকিত করেছেন।"],
+          ["تشرفت بزيارتك","আপনার আগমনে আনন্দিত।"],
+          ["متى ستعود؟","আপনি আবার কখন আসবেন?"],
+          ["سأعود قريباً","আমি শিগগির আবার আসব।"],
+          ["في أمان الله","আল্লাহর হেফাজতে থাকুন।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ৩০: জরুরি সাহায্য",
+        lines: [
+          ["ساعدني من فضلك","অনুগ্রহ করে আমাকে সাহায্য করুন।"],
+          ["هل أنت بخير؟","আপনি কি ভালো আছেন?"],
+          ["أنا مريض","আমি অসুস্থ। ছেলে বলবে।"],
+          ["أنا مريضة","আমি অসুস্থ। মেয়ে বলবে।"],
+          ["أحتاج إلى طبيب","আমার একজন ডাক্তার দরকার।"],
+          ["اتصل بالطبيب","ডাক্তারকে ফোন করুন।"],
+          ["أين المستشفى؟","হাসপাতাল কোথায়?"],
+          ["أحتاج إلى دواء","আমার ওষুধ দরকার।"],
+          ["أنا خائف","আমি ভয় পাচ্ছি। ছেলে বলবে।"],
+          ["أنا خائفة","আমি ভয় পাচ্ছি। মেয়ে বলবে।"],
+          ["لا تقلق","চিন্তা করবেন না।"],
+          ["اهدأ قليلاً","একটু শান্ত হন।"],
+          ["اتصل بالشرطة","পুলিশকে ফোন করুন।"],
+          ["اتصل بالإسعاف","অ্যাম্বুলেন্স ডাকুন।"],
+          ["لقد ضعت","আমি পথ হারিয়েছি।"],
+          ["سرقوا حقيبتي","আমার ব্যাগ চুরি হয়েছে।"],
+          ["هاتفي ضائع","আমার ফোন হারিয়েছে।"],
+          ["أين أقرب مركز شرطة؟","নিকটতম পুলিশ স্টেশন কোথায়?"],
+          ["شكراً لمساعدتك","সাহায্যের জন্য ধন্যবাদ।"],
+          ["الله يحفظك","আল্লাহ আপনাকে হেফাজত করুন।"]
+        ]
+      }
+
+    ];
+
+    function back() {
+      document.getElementById("menu").style.display = "block";
+      document.getElementById("page").style.display = "none";
+    }
+
+    function openLesson(index) {
+      const lesson = lessons[index];
+
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("page").style.display = "block";
+      document.getElementById("title").textContent = lesson.title;
+
+      const linesBox = document.getElementById("lines");
+      linesBox.innerHTML = "";
+
+      for (let i = 0; i < lesson.lines.length; i++) {
+        const box = document.createElement("div");
+        box.className = "line";
+
+        const arabic = document.createElement("div");
+        arabic.className = "ar";
+        arabic.textContent = (i + 1) + ". " + lesson.lines[i][0];
+
+        const bangla = document.createElement("div");
+        bangla.className = "bn";
+        bangla.textContent = lesson.lines[i][1];
+
+        const button = document.createElement("button");
+        button.className = "listen";
+        button.textContent = "🔊 শুনুন";
+
+        button.onclick = function () {
+          const speech = new SpeechSynthesisUtterance(lesson.lines[i][0]);
+          speech.lang = "ar-SA";
+          speech.rate = 0.75;
+
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(speech);
+        };
+
+        box.appendChild(arabic);
+        box.appendChild(bangla);
+        box.appendChild(button);
+
+        linesBox.appendChild(box);
+      }
+
+      window.scrollTo(0, 0);
+    }
+
+    for (let i = 0; i < lessons.length; i++) {
+      const button = document.createElement("button");
+
+      button.className = "lesson";
+      button.textContent = lessons[i].title;
+
+      button.onclick = function () {
+        openLesson(i);
+      };
+
+      document.getElementById("menu").appendChild(button);
+    }
+  </script>
+</body>
+</html>

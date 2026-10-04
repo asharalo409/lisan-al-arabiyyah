@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>সেটিংস | لِسَانُ العَرَبِيَّة</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0B5D3B" />
+
+  <style>
+    :root {
+      --primary: #0b5d3b;
+      --primary-light: #e8f6ee;
+      --background: #f6f7f2;
+      --surface: #ffffff;
+      --text: #18352a;
+      --muted: #6e7e75;
+      --border: #e5ebe6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    .app {
+      max-width: 520px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: var(--surface);
+      padding-bottom: 30px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0b5d3b, #15835a);
+      color: white;
+      padding: 18px 16px;
+    }
+
+    .back-button {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .header h1 {
+      font-size: 20px;
+    }
+
+    .header p {
+      margin-top: 3px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 18px 16px;
+    }
+
+    .section-title {
+      margin: 18px 0 11px;
+      color: var(--text);
+      font-size: 18px;
+    }
+
+    .setting-card {
+      padding: 16px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: 0 4px 12px rgba(20, 70, 45, 0.05);
+    }
+
+    .setting-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .setting-icon {
+      font-size: 25px;
+    }
+
+    .setting-info {
+      flex: 1;
+    }
+
+    .setting-info h3 {
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .setting-info p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .theme-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .theme-button {
+      padding: 11px 6px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: white;
+      color: #18352a;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .theme-button.selected {
+      border-color: #087443;
+      background: #e8f6ee;
+      color: #075b34;
+    }
+
+    .theme-preview {
+      display: block;
+      width: 100%;
+      height: 22px;
+      margin-bottom: 7px;
+      border-radius: 6px;
+    }
+
+    .light-preview {
+      background: linear-gradient(135deg, #ffffff, #e8f6ee);
+      border: 1px solid #dce6df;
+    }
+
+    .dark-preview {
+      background: linear-gradient(135deg, #16261f, #314b3d);
+    }
+
+    .green-preview {
+      background: linear-gradient(135deg, #0b5d3b, #15835a);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 27px;
+    }
+
+    .switch input {
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: #c8d3cc;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      bottom: 4px;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: white;
+      transition: 0.3s;
+    }
+
+    input:checked + .slider {
+      background: #087443;
+    }
+
+    input:checked + .slider::before {
+      transform: translateX(21px);
+    }
+
+    .time-row {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .time-row label {
+      flex: 1;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .time-input {
+      padding: 9px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--text);
+      background: white;
+      font-size: 14px;
+    }
+
+    .study-box {
+      padding: 16px;
+      border-radius: 16px;
+      background: #fffdf5;
+      border: 1px solid #e7d9a8;
+    }
+
+    .study-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .study-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .study-label {
+      color: #705500;
+      font-size: 14px;
+    }
+
+    .study-value {
+      color: #9a7200;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .clear-button {
+      width: 100%;
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px solid #dc7777;
+      border-radius: 11px;
+      background: #fff6f6;
+      color: #a02323;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <header class="header">
+      <button class="back-button" onclick="window.location.href='index.html'">←</button>
+
+      <div>
+        <h1>সেটিংস</h1>
+        <p>الإعدادات</p>
+      </div>
+    </header>
+
+    <section class="content">
+
+      <h2 class="section-title">অ্যাপের থিম</h2>
+
+      <section class="setting-card">
+        <div class="setting-top">
+          <div class="setting-icon">🎨</div>
+
+          <div class="setting-info">
+            <h3>আপনার পছন্দের রং নির্বাচন করুন</h3>
+            <p>থিম পরিবর্তন করলে অ্যাপের রং বদলাবে এবং আপনার পছন্দটি সংরক্ষিত থাকবে।</p>
+          </div>
+        </div>
+
+        <div class="theme-options">
+          <button class="theme-button selected" id="lightTheme" onclick="setTheme('light')">
+            <span class="theme-preview light-preview"></span>
+            Light
+          </button>
+
+          <button class="theme-button" id="darkTheme" onclick="setTheme('dark')">
+            <span class="theme-preview dark-preview"></span>
+            Dark
+          </button>
+
+          <button class="theme-button" id="greenTheme" onclick="setTheme('green')">
+            <span class="theme-preview green-preview"></span>
+            Islamic Green
+          </button>
+        </div>
+      </section>
+
+      <h2 class="section-title">পড়ার Reminder</h2>
+
+      <section class="setting-card">
+        <div class="setting-top">
+          <div class="setting-icon">🔔</div>
+
+          <div class="setting-info">
+            <h3>প্রতিদিন পড়ার Notification</h3>
+            <p>প্রতিদিন আরবি অনুশীলনের কথা মনে করিয়ে দেওয়ার অনুমতি দিন।</p>
+          </div>
+
+          <label class="switch">
+            <input id="notificationToggle" type="checkbox" onchange="toggleNotifications()">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="time-row" id="reminderTimeRow">
+          <label for="reminderTime">প্রতিদিন reminder-এর সময়</label>
+
+          <input
+            id="reminderTime"
+            class="time-input"
+            type="time"
+            value="20:00"
+            onchange="saveReminderTime()"
+          >
+        </div>
+
+        <p class="note">
+          Notification চালু করতে browser-এর অনুমতি দিতে হবে। ফোনে app বন্ধ থাকলেও নির্দিষ্ট সময়ে reminder পাঠানোর জন্য পরে Push Notification ব্যবস্থা যুক্ত করা হবে।
+        </p>
+      </section>
+
+      <h2 class="section-title">আপনার পড়ার সময়</h2>
+
+      <section class="study-box">
+        <div class="study-row">
+          <span class="study-label">আজ পড়েছেন</span>
+          <span class="study-value" id="todayStudyTime">০ মিনিট</span>
+        </div>
+
+        <div class="study-row">
+          <span class="study-label">মোট পড়ার সময়</span>
+          <span class="study-value" id="totalStudyTime">০ মিনিট</span>
+        </div>
+
+        <div class="study-row">
+          <span class="study-label">ধারাবাহিক শেখার দিন</span>
+          <span class="study-value" id="studyStreak">০ দিন</span>
+        </div>
+      </section>
+
+      <button class="clear-button" onclick="clearLearningData()">
+        পড়ার সময় ও স্থানীয় তথ্য মুছুন
+      </button>
+
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js");
+      });
+    }
+  </script>
+</body>
+</html>

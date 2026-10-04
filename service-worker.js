@@ -1,26 +1,6 @@
-const CACHE_NAME = "lisan-al-arabiyyah-v2";
+const CACHE_NAME = "lisan-al-arabiyyah-v3";
 
-const APP_FILES = [
-  "/",
-  "/index.html",
-  "/lessons.html",
-  "/vocabulary.html",
-  "/quiz.html",
-  "/chat.html",
-  "/profile.html",
-  "/settings.html",
-  "/app.js",
-  "/manifest.json",
-  "/icon.svg"
-];
-
-self.addEventListener("install", function (event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(APP_FILES);
-    })
-  );
-
+self.addEventListener("install", function () {
   self.skipWaiting();
 });
 
@@ -46,14 +26,29 @@ self.addEventListener("fetch", function (event) {
   }
 
   event.respondWith(
-    caches.match(event.request).then(function (cachedResponse) {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+    fetch(event.request)
+      .then(function (networkResponse) {
+        const responseCopy = networkResponse.clone();
 
-      return fetch(event.request).catch(function () {
-        return caches.match("/index.html");
-      });
-    })
+        if (
+          networkResponse.ok &&
+          new URL(event.request.url).origin === self.location.origin
+        ) {
+          caches.open(CACHE_NAME).then(function (cache) {
+            cache.put(event.request, responseCopy);
+          });
+        }
+
+        return networkResponse;
+      })
+      .catch(function () {
+        return caches.match(event.request).then(function (cachedResponse) {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+
+          return caches.match("/index.html");
+        });
+      })
   );
 });

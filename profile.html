@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>আমার প্রোফাইল | لِسَانُ العَرَبِيَّة</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0B5D3B" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: #f6f7f2;
+      color: #18352a;
+    }
+
+    .app {
+      max-width: 520px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #ffffff;
+      padding-bottom: 30px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0b5d3b, #15835a);
+      color: white;
+      padding: 18px 16px;
+    }
+
+    .back-button {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .header h1 {
+      font-size: 20px;
+    }
+
+    .header p {
+      margin-top: 3px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 18px 16px;
+    }
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #e8f6ee;
+      border: 1px solid #b8e0c7;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #087443;
+      color: white;
+      font-size: 29px;
+      font-weight: bold;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-info h2 {
+      color: #075b34;
+      font-size: 19px;
+      margin-bottom: 5px;
+    }
+
+    .profile-info p {
+      color: #476158;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .edit-button {
+      padding: 8px 10px;
+      border: 1px solid #77bd91;
+      border-radius: 9px;
+      background: white;
+      color: #087443;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .section-title {
+      margin: 20px 0 12px;
+      color: #18352a;
+      font-size: 19px;
+    }
+
+    .progress-card {
+      padding: 17px;
+      border-radius: 17px;
+      background: #fffdf5;
+      border: 1px solid #e7d9a8;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 11px;
+    }
+
+    .progress-top h3 {
+      color: #705500;
+      font-size: 16px;
+    }
+
+    .progress-top span {
+      color: #9a7200;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #f0e5bd;
+      border-radius: 50px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 10%;
+      height: 100%;
+      background: #b68a00;
+      border-radius: 50px;
+    }
+
+    .progress-text {
+      margin-top: 10px;
+      color: #736c54;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat-card {
+      padding: 15px 8px;
+      text-align: center;
+      border: 1px solid #e5ebe6;
+      border-radius: 14px;
+      background: white;
+      box-shadow: 0 4px 12px rgba(20, 70, 45, 0.05);
+    }
+
+    .stat-number {
+      color: #087443;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: #6e7e75;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .goal-card {
+      display: flex;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #edf6ff;
+      border: 1px solid #c6e0f3;
+    }
+
+    .goal-icon {
+      font-size: 28px;
+    }
+
+    .goal-card h3 {
+      color: #24526d;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .goal-card p {
+      color: #567080;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .menu-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      margin-bottom: 10px;
+      border: 1px solid #e5ebe6;
+      border-radius: 14px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .menu-icon {
+      font-size: 22px;
+    }
+
+    .menu-text {
+      flex: 1;
+    }
+
+    .menu-text h3 {
+      font-size: 15px;
+      color: #18352a;
+      margin-bottom: 3px;
+    }
+
+    .menu-text p {
+      color: #6e7e75;
+      font-size: 12px;
+    }
+
+    .arrow {
+      font-size: 23px;
+      color: #087443;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <header class="header">
+      <button class="back-button" onclick="window.location.href='index.html'">←</button>
+
+      <div>
+        <h1>আমার প্রোফাইল</h1>
+        <p>مَلَفِّي الشَّخْصِيّ</p>
+      </div>
+    </header>
+
+    <section class="content">
+
+      <section class="profile-card">
+        <div class="avatar">ن</div>
+
+        <div class="profile-info">
+          <h2>আরবি শিক্ষার্থী</h2>
+          <p>لِسَانُ العَرَبِيَّة-এ আপনাকে স্বাগতম</p>
+        </div>
+
+        <button class="edit-button" onclick="alert('Login ও Profile Edit ফিচার পরে Supabase-এর সঙ্গে যুক্ত করা হবে।')">
+          Edit
+        </button>
+      </section>
+
+      <h2 class="section-title">শেখার অগ্রগতি</h2>
+
+      <section class="progress-card">
+        <div class="progress-top">
+          <h3>আরবি প্রাথমিক কোর্স</h3>
+          <span>১০%</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+
+        <p class="progress-text">
+          আপনি ১০টি পাঠের মধ্যে ১টি পাঠ শুরু করেছেন।
+          নিয়মিত চর্চা চালিয়ে যান।
+        </p>
+      </section>
+
+      <h2 class="section-title">আমার পরিসংখ্যান</h2>
+
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">১</div>
+          <div class="stat-label">সম্পন্ন পাঠ</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">০</div>
+          <div class="stat-label">কুইজ স্কোর</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">৮</div>
+          <div class="stat-label">শেখা শব্দ</div>
+        </div>
+      </section>
+
+      <h2 class="section-title">আজকের লক্ষ্য</h2>
+
+      <section class="goal-card">
+        <div class="goal-icon">🎯</div>
+
+        <div>
+          <h3>৫টি নতুন শব্দ শিখুন</h3>
+          <p>
+            আজ শব্দভান্ডার থেকে অন্তত পাঁচটি আরবি শব্দ পড়ুন,
+            উচ্চারণ শুনুন এবং কুইজ দিন।
+          </p>
+        </div>
+      </section>
+
+      <h2 class="section-title">অ্যাকাউন্ট</h2>
+
+      <div class="menu-card" onclick="alert('Login ফিচারটি পরে যুক্ত করা হবে।')">
+        <div class="menu-icon">🔐</div>
+
+        <div class="menu-text">
+          <h3>লগইন বা অ্যাকাউন্ট তৈরি করুন</h3>
+          <p>আপনার অগ্রগতি নিরাপদে সংরক্ষণ করুন</p>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+
+      <div class="menu-card" onclick="alert('Settings ফিচারটি পরে যুক্ত করা হবে।')">
+        <div class="menu-icon">⚙️</div>
+
+        <div class="menu-text">
+          <h3>সেটিংস</h3>
+          <p>ভাষা, নোটিফিকেশন ও অন্যান্য পছন্দ</p>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js");
+      });
+    }
+  </script>
+</body>
+</html>

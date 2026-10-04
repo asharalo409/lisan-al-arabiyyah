@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AI আরবি শিক্ষক | لِسَانُ العَرَبِيَّة</title>
-
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#0B5D3B" />
+  <title>AI আরবি শিক্ষক</title>
 
   <style>
     * {
@@ -23,151 +20,152 @@
     }
 
     .app {
-      position: relative;
       max-width: 520px;
       min-height: 100vh;
       margin: 0 auto;
       background: #ffffff;
-      padding-bottom: 90px;
+      padding-bottom: 95px;
     }
 
     .header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
       background: linear-gradient(135deg, #0b5d3b, #15835a);
       color: white;
-      padding: 18px 16px;
+      padding: 23px 18px 26px;
+      border-radius: 0 0 25px 25px;
     }
 
     .back-button {
-      width: 38px;
-      height: 38px;
-      border: none;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.18);
+      display: inline-block;
       color: white;
-      font-size: 22px;
-      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 15px;
+      opacity: 0.95;
     }
 
     .header h1 {
-      font-size: 20px;
+      font-size: 23px;
+      margin-bottom: 7px;
     }
 
     .header p {
-      margin-top: 3px;
-      font-size: 12px;
-      opacity: 0.9;
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.93;
     }
 
-    .teacher-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .level-box {
       margin: 16px;
       padding: 14px;
-      border-radius: 16px;
-      background: #e8f6ee;
-      border: 1px solid #b8e0c7;
+      border-radius: 14px;
+      background: #fffdf5;
+      border: 1px solid #e7d9a8;
     }
 
-    .teacher-avatar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: #087443;
-      color: white;
-      font-size: 23px;
+    .level-box strong {
+      display: block;
+      color: #9a7200;
+      font-size: 14px;
+      margin-bottom: 5px;
     }
 
-    .teacher-card h2 {
-      color: #075b34;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .teacher-card p {
-      color: #476158;
-      font-size: 12px;
-      line-height: 1.5;
+    .level-box p {
+      color: #53645b;
+      font-size: 13px;
+      line-height: 1.6;
     }
 
     .chat-area {
-      padding: 0 16px 16px;
-    }
-
-    .message-row {
-      display: flex;
-      margin-bottom: 13px;
-    }
-
-    .message-row.teacher {
-      justify-content: flex-start;
-    }
-
-    .message-row.user {
-      justify-content: flex-end;
+      padding: 0 16px 18px;
     }
 
     .message {
-      max-width: 85%;
-      padding: 12px 14px;
+      max-width: 88%;
+      margin-bottom: 14px;
+      padding: 13px 14px;
       border-radius: 15px;
       font-size: 14px;
-      line-height: 1.65;
+      line-height: 1.7;
       white-space: pre-line;
     }
 
     .teacher-message {
-      background: #eef5f0;
-      color: #244738;
-      border-bottom-left-radius: 4px;
+      background: #e8f6ee;
+      border: 1px solid #b8e0c7;
+      color: #18352a;
+      border-top-left-radius: 4px;
     }
 
     .user-message {
-      background: #087443;
+      margin-left: auto;
+      background: #0b7042;
       color: white;
-      border-bottom-right-radius: 4px;
-      direction: rtl;
+      border-top-right-radius: 4px;
       text-align: right;
-      font-size: 17px;
-    }
-
-    .arabic {
       direction: rtl;
-      text-align: right;
+      font-family: "Noto Sans Arabic", Arial, sans-serif;
       font-size: 18px;
+    }
+
+    .message-title {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
       font-weight: bold;
-      margin: 5px 0;
-    }
-
-    .quick-title {
-      margin: 8px 16px 10px;
-      color: #52635b;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .quick-replies {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 0 16px 12px;
-    }
-
-    .quick-button {
-      flex: 0 0 auto;
-      padding: 9px 12px;
-      border: 1px solid #b8e0c7;
-      border-radius: 20px;
-      background: #f6fff9;
       color: #087443;
+    }
+
+    .user-message .message-title {
+      color: #d8f5e4;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .arabic-answer {
+      direction: rtl;
+      text-align: right;
+      font-family: "Noto Sans Arabic", Arial, sans-serif;
+      font-size: 20px;
+      color: #075b34;
+      line-height: 1.9;
+      margin: 7px 0;
+    }
+
+    .bangla-answer {
+      color: #4c6257;
       font-size: 13px;
+      line-height: 1.65;
+      margin-top: 9px;
+    }
+
+    .correction-box {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #fff8df;
+      border: 1px solid #eedc9d;
+      color: #695517;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .speak-answer {
+      margin-top: 10px;
+      border: none;
+      background: #d7f0e0;
+      color: #075b34;
+      padding: 9px 11px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: bold;
       cursor: pointer;
+    }
+
+    .typing {
+      display: none;
+      margin: 0 16px 15px;
+      color: #587166;
+      font-size: 13px;
     }
 
     .input-area {
@@ -175,38 +173,71 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
       width: 100%;
       max-width: 520px;
-      padding: 11px 12px;
+      padding: 10px 12px;
       background: white;
-      border-top: 1px solid #e6ebe7;
+      border-top: 1px solid #e3eae5;
     }
 
-    .chat-input {
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    #messageInput {
       flex: 1;
-      min-width: 0;
-      padding: 12px 13px;
-      border: 1px solid #cddbd2;
+      min-height: 46px;
+      border: 1px solid #cfdcd4;
       border-radius: 12px;
-      font-family: Arial, "Noto Sans Arabic", sans-serif;
-      font-size: 15px;
+      padding: 10px 12px;
+      font-family: "Noto Sans Arabic", Arial, sans-serif;
+      font-size: 17px;
+      direction: rtl;
+      text-align: right;
       outline: none;
     }
 
-    .chat-input:focus {
+    #messageInput:focus {
       border-color: #087443;
     }
 
+    .mic-button,
     .send-button {
-      width: 47px;
+      width: 48px;
+      height: 46px;
       border: none;
       border-radius: 12px;
-      background: #087443;
       color: white;
       font-size: 20px;
       cursor: pointer;
+    }
+
+    .mic-button {
+      background: #c54a3c;
+    }
+
+    .mic-button.listening {
+      background: #8d1d14;
+      animation: pulse 1s infinite;
+    }
+
+    .send-button {
+      background: #087443;
+    }
+
+    .hint {
+      margin-top: 7px;
+      text-align: center;
+      color: #7b8b82;
+      font-size: 11px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
@@ -214,185 +245,285 @@
 <body>
   <main class="app">
 
-    <header class="header">
-      <button class="back-button" onclick="window.location.href='index.html'">←</button>
+    <section class="header">
+      <a class="back-button" href="index.html">← হোমে ফিরে যান</a>
 
-      <div>
-        <h1>AI আরবি শিক্ষক</h1>
-        <p>تَحَدَّثْ مَعَ مُعَلِّمِكَ</p>
-      </div>
-    </header>
+      <h1>🤖 AI আরবি শিক্ষক</h1>
 
-    <section class="teacher-card">
-      <div class="teacher-avatar">🤖</div>
+      <p>
+        আরবিতে বলুন বা লিখুন।<br />
+        শিক্ষক ভুল ঠিক করবে এবং আরবিতে উত্তর দেবে।
+      </p>
+    </section>
 
-      <div>
-        <h2>আপনার আরবি শিক্ষক</h2>
-        <p>আরবিতে লিখুন। আমি উত্তর, উচ্চারণ, অর্থ ও সহজ ব্যাখ্যা দেব।</p>
-      </div>
+    <section class="level-box">
+      <strong>বর্তমান স্তর: Level 1</strong>
+      <p>
+        বিষয়: সালাম, পরিচয় ও সহজ দৈনন্দিন কথোপকথন।
+        ছোট আরবি বাক্যে উত্তর দেওয়ার চেষ্টা করুন।
+      </p>
     </section>
 
     <section class="chat-area" id="chatArea">
-      <div class="message-row teacher">
-        <div class="message teacher-message">
-          اَلسَّلَامُ عَلَيْكُمْ!<br />
-          আস-সালামু আলাইকুম!<br />
-          আমি আপনার আরবি শিক্ষক। আজ আমরা আরবিতে সহজ কথোপকথন অনুশীলন করব। আপনি আরবিতে লিখুন।
+
+      <div class="message teacher-message">
+        <span class="message-title">AI শিক্ষক</span>
+
+        <div class="arabic-answer" lang="ar">
+          أَلسَّلَامُ عَلَيْكُمْ
         </div>
+
+        <div class="bangla-answer">
+          আসসালামু আলাইকুম। আমি আপনার আরবি শিক্ষক।
+          আরবিতে উত্তর দিন।
+        </div>
+
+        <button
+          class="speak-answer"
+          onclick="speakArabic('أَلسَّلَامُ عَلَيْكُمْ')"
+        >
+          🔊 আরবিতে শুনুন
+        </button>
       </div>
+
     </section>
 
-    <p class="quick-title">দ্রুত অনুশীলন করুন</p>
-
-    <section class="quick-replies">
-      <button class="quick-button" onclick="sendQuickMessage('اَلسَّلَامُ عَلَيْكُمْ')">
-        اَلسَّلَامُ عَلَيْكُمْ
-      </button>
-
-      <button class="quick-button" onclick="sendQuickMessage('كَيْفَ حَالُكَ؟')">
-        كَيْفَ حَالُكَ؟
-      </button>
-
-      <button class="quick-button" onclick="sendQuickMessage('اِسْمِي نَاصِرٌ')">
-        اِسْمِي نَاصِرٌ
-      </button>
-
-      <button class="quick-button" onclick="sendQuickMessage('أَنَا مِنْ بَنْغَلَادِيشَ')">
-        أَنَا مِنْ بَنْغَلَادِيشَ
-      </button>
-    </section>
+    <div class="typing" id="typing">
+      🤖 AI শিক্ষক উত্তর তৈরি করছে...
+    </div>
 
     <section class="input-area">
-      <input
-        class="chat-input"
-        id="chatInput"
-        type="text"
-        placeholder="আরবিতে লিখুন..."
-        onkeypress="handleEnter(event)"
-      />
+      <div class="input-row">
+        <button
+          class="mic-button"
+          id="micButton"
+          onclick="startListening()"
+          title="আরবিতে কথা বলুন"
+        >
+          🎙️
+        </button>
 
-      <button class="send-button" onclick="sendMessage()">➤</button>
+        <input
+          id="messageInput"
+          type="text"
+          placeholder="আরবিতে লিখুন বা 🎙️ চাপুন"
+          onkeydown="handleEnter(event)"
+        />
+
+        <button
+          class="send-button"
+          onclick="sendMessage()"
+          title="পাঠান"
+        >
+          ➤
+        </button>
+      </div>
+
+      <div class="hint">
+        🎙️ চাপুন → আরবিতে বলুন → AI-এর উত্তর শুনুন
+      </div>
     </section>
 
   </main>
 
   <script>
+    let arabicVoices = [];
+    let recognition = null;
+    let isListening = false;
+
+    function loadArabicVoices() {
+      const voices = window.speechSynthesis.getVoices();
+
+      arabicVoices = voices.filter(function (voice) {
+        return voice.lang.toLowerCase().startsWith("ar");
+      });
+    }
+
+    if ("speechSynthesis" in window) {
+      loadArabicVoices();
+      window.speechSynthesis.onvoiceschanged = loadArabicVoices;
+    }
+
+    function speakArabic(text) {
+      if (!("speechSynthesis" in window)) {
+        alert("এই browser-এ আরবি উচ্চারণ চালু নেই।");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const speech = new SpeechSynthesisUtterance(text);
+
+      speech.lang = "ar-SA";
+      speech.rate = 0.75;
+      speech.pitch = 1;
+      speech.volume = 1;
+
+      const arabicVoice =
+        arabicVoices.find(function (voice) {
+          return voice.lang === "ar-SA";
+        }) ||
+        arabicVoices.find(function (voice) {
+          return voice.lang.startsWith("ar");
+        });
+
+      if (arabicVoice) {
+        speech.voice = arabicVoice;
+      }
+
+      window.speechSynthesis.speak(speech);
+    }
+
+    function startListening() {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        alert("এই browser-এ voice input কাজ করছে না। Chrome দিয়ে খুলুন।");
+        return;
+      }
+
+      if (isListening && recognition) {
+        recognition.stop();
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.lang = "ar-SA";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onstart = function () {
+        isListening = true;
+        document.getElementById("micButton").classList.add("listening");
+      };
+
+      recognition.onresult = function (event) {
+        const spokenText = event.results[0][0].transcript;
+        document.getElementById("messageInput").value = spokenText;
+        sendMessage();
+      };
+
+      recognition.onerror = function () {
+        alert("কথা শোনা যায়নি। আবার 🎙️ চাপুন এবং পরিষ্কার করে আরবিতে বলুন।");
+      };
+
+      recognition.onend = function () {
+        isListening = false;
+        document.getElementById("micButton").classList.remove("listening");
+      };
+
+      recognition.start();
+    }
+
     function handleEnter(event) {
       if (event.key === "Enter") {
         sendMessage();
       }
     }
 
-    function sendQuickMessage(message) {
-      document.getElementById("chatInput").value = message;
-      sendMessage();
-    }
-
     function addUserMessage(text) {
       const chatArea = document.getElementById("chatArea");
 
-      const row = document.createElement("div");
-      row.className = "message-row user";
-
       const message = document.createElement("div");
       message.className = "message user-message";
-      message.innerText = text;
 
-      row.appendChild(message);
-      chatArea.appendChild(row);
+      message.innerHTML =
+        '<span class="message-title">আপনি</span>' +
+        escapeHtml(text);
 
+      chatArea.appendChild(message);
       scrollToBottom();
     }
 
-    function addTeacherMessage(text) {
+    function addTeacherMessage(arabic, bangla, correction) {
       const chatArea = document.getElementById("chatArea");
-
-      const row = document.createElement("div");
-      row.className = "message-row teacher";
 
       const message = document.createElement("div");
       message.className = "message teacher-message";
-      message.innerHTML = text;
 
-      row.appendChild(message);
-      chatArea.appendChild(row);
+      let correctionHtml = "";
 
+      if (correction) {
+        correctionHtml =
+          '<div class="correction-box">✏️ সংশোধন: ' +
+          escapeHtml(correction) +
+          "</div>";
+      }
+
+      message.innerHTML =
+        '<span class="message-title">AI শিক্ষক</span>' +
+        '<div class="arabic-answer" lang="ar">' +
+        escapeHtml(arabic) +
+        "</div>" +
+        '<div class="bangla-answer">' +
+        escapeHtml(bangla) +
+        "</div>" +
+        correctionHtml +
+        '<button class="speak-answer">🔊 আরবিতে শুনুন</button>';
+
+      message.querySelector(".speak-answer").onclick = function () {
+        speakArabic(arabic);
+      };
+
+      chatArea.appendChild(message);
       scrollToBottom();
+
+      speakArabic(arabic);
     }
 
-    function getTeacherReply(text) {
-      const input = text.trim().toLowerCase();
-
-      if (
-        input.includes("السلام عليكم") ||
-        input.includes("اَلسَّلَامُ عَلَيْكُمْ")
-      ) {
-        return `
-          <div class="arabic">وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</div>
-          <strong>উচ্চারণ:</strong> ওয়া আলাইকুমুস সালাম ওয়া রহমাতুল্লাহি ওয়া বারাকাতুহ।<br />
-          <strong>অর্থ:</strong> আপনার ওপরও শান্তি, আল্লাহর রহমত ও বরকত বর্ষিত হোক।<br /><br />
-          <strong>শিক্ষা:</strong> আপনার সালামটি সঠিক ছিল। মাশাআল্লাহ!
-        `;
-      }
-
-      if (
-        input.includes("كيف حالك") ||
-        input.includes("كَيْفَ حَالُكَ")
-      ) {
-        return `
-          <div class="arabic">أَنَا بِخَيْرٍ، اَلْحَمْدُ لِلّٰهِ</div>
-          <strong>উচ্চারণ:</strong> আনা বিখাইরিন, আলহামদু লিল্লাহ।<br />
-          <strong>অর্থ:</strong> আমি ভালো আছি, আলহামদুলিল্লাহ।<br /><br />
-          <strong>ব্যাখ্যা:</strong> كَيْفَ অর্থ “কেমন”, আর حَالُكَ অর্থ “তোমার অবস্থা”।
-        `;
-      }
-
-      if (
-        input.includes("اسمي") ||
-        input.includes("اِسْمِي")
-      ) {
-        return `
-          <div class="arabic">تَشَرَّفْتُ بِمَعْرِفَتِكَ</div>
-          <strong>উচ্চারণ:</strong> তাশাররাফতু বিমা‘রিফাতিক।<br />
-          <strong>অর্থ:</strong> আপনার সঙ্গে পরিচিত হয়ে আনন্দিত হলাম।<br /><br />
-          <strong>ব্যাখ্যা:</strong> اِسْمِي অর্থ “আমার নাম”। আপনার বাক্যের গঠন সুন্দর হয়েছে।
-        `;
-      }
-
-      if (
-        input.includes("بنغلاديش") ||
-        input.includes("بَنْغَلَادِيش")
-      ) {
-        return `
-          <div class="arabic">أَهْلًا وَسَهْلًا بِكَ مِنْ بَنْغَلَادِيشَ</div>
-          <strong>উচ্চারণ:</strong> আহলান ওয়া সাহলান বিকা মিন বাংলাদীশ।<br />
-          <strong>অর্থ:</strong> বাংলাদেশ থেকে আপনাকে স্বাগতম।<br /><br />
-          <strong>ব্যাখ্যা:</strong> أَنَا مِنْ بَنْغَلَادِيشَ অর্থ “আমি বাংলাদেশ থেকে এসেছি।”
-        `;
-      }
-
-      return `
-        <div class="arabic">أَحْسَنْتَ! حَاوِلْ أَنْ تَكْتُبَ جُمْلَةً قَصِيرَةً.</div>
-        <strong>উচ্চারণ:</strong> আহসানতা! হাওয়িল আন তাক্তুবা জুমলাতান কাসীরাহ।<br />
-        <strong>অর্থ:</strong> ভালো চেষ্টা! একটি ছোট বাক্য লেখার চেষ্টা করুন।<br /><br />
-        উদাহরণ: <strong>أَنَا طَالِبٌ</strong> — আমি একজন ছাত্র।
-      `;
-    }
-
-    function sendMessage() {
-      const input = document.getElementById("chatInput");
+    async function sendMessage() {
+      const input = document.getElementById("messageInput");
       const text = input.value.trim();
 
-      if (text === "") {
+      if (!text) {
         return;
       }
 
       addUserMessage(text);
       input.value = "";
 
-      setTimeout(function () {
-        addTeacherMessage(getTeacherReply(text));
-      }, 500);
+      const typing = document.getElementById("typing");
+      typing.style.display = "block";
+      scrollToBottom();
+
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: text
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "AI response পাওয়া যায়নি।");
+        }
+
+        addTeacherMessage(
+          data.arabic,
+          data.bangla,
+          data.correction
+        );
+      } catch (error) {
+        addTeacherMessage(
+          "عَفْوًا، حَاوِلْ مَرَّةً أُخْرَى",
+          "দুঃখিত, AI শিক্ষক এখন উত্তর দিতে পারছে না। পরে আবার চেষ্টা করুন।",
+          ""
+        );
+      } finally {
+        typing.style.display = "none";
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
     }
 
     function scrollToBottom() {
@@ -401,12 +532,7 @@
         behavior: "smooth"
       });
     }
-
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
-        navigator.serviceWorker.register("service-worker.js");
-      });
-    }
   </script>
+
 </body>
 </html>

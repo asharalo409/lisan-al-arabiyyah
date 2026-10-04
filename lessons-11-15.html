@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আরবি পাঠ ১১–১৫</title>
+
+  <style>
+    body{margin:0;font-family:Arial,sans-serif;background:#f2f7f3;color:#183b2c}
+    .app{max-width:520px;min-height:100vh;margin:auto;background:#fff}
+    header{padding:22px 18px;color:#fff;background:#087443;border-radius:0 0 25px 25px}
+    header a{color:#fff;text-decoration:none}
+    #menu,#page{padding:16px}
+    #page{display:none}
+    .lesson-button{width:100%;margin-bottom:12px;padding:19px;color:#075b34;background:#e8f6ee;border:1px solid #b8dfc7;border-radius:15px;text-align:left;font-size:19px;font-weight:bold}
+    .back{padding:10px;color:#fff;background:#087443;border:0;border-radius:9px}
+    .line{margin:13px 0;padding:17px;background:#f0f9f3;border:1px solid #d1ead9;border-radius:13px}
+    .arabic{color:#075b34;font-size:27px;text-align:right;direction:rtl}
+    .bangla{margin-top:8px;font-size:18px}
+    .listen{margin-top:10px;padding:9px;color:#075b34;background:#d3f0df;border:0;border-radius:8px}
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <header>
+      <a href="lessons.html">← সব পাঠে যান</a>
+      <h1>আরবি পাঠ ১১–১৫</h1>
+      <p>প্রতি পাঠে ২০টি বাক্য</p>
+    </header>
+
+    <section id="menu"></section>
+
+    <section id="page">
+      <button class="back" onclick="showMenu()">← পাঠের তালিকা</button>
+      <h2 id="title"></h2>
+      <div id="lines"></div>
+    </section>
+  </main>
+
+  <script>
+    const lessons = [
+      {
+        title: "পাঠ ১১: বাজারে যাওয়া",
+        lines: [
+          ["أين السوق؟","বাজার কোথায়?"],
+          ["السوق قريب","বাজার কাছে।"],
+          ["السوق بعيد","বাজার দূরে।"],
+          ["أنا ذاهب إلى السوق","আমি বাজারে যাচ্ছি। ছেলে বলবে।"],
+          ["أنا ذاهبة إلى السوق","আমি বাজারে যাচ্ছি। মেয়ে বলবে।"],
+          ["هل تريد أن تذهب إلى السوق؟","আপনি কি বাজারে যেতে চান?"],
+          ["نعم، أريد أن أذهب","হ্যাঁ, আমি যেতে চাই।"],
+          ["متى نذهب إلى السوق؟","আমরা কখন বাজারে যাব?"],
+          ["نذهب الآن","আমরা এখন যাই।"],
+          ["ماذا تريد أن تشتري؟","আপনি কী কিনতে চান?"],
+          ["أريد أن أشتري الخضروات","আমি সবজি কিনতে চাই।"],
+          ["أريد أن أشتري الفواكه","আমি ফল কিনতে চাই।"],
+          ["أريد أن أشتري السمك","আমি মাছ কিনতে চাই।"],
+          ["أريد أن أشتري اللحم","আমি মাংস কিনতে চাই।"],
+          ["خذ الحقيبة","ব্যাগটি নিন।"],
+          ["هذه حقيبتي","এটি আমার ব্যাগ।"],
+          ["السوق مزدحم","বাজারে অনেক ভিড়।"],
+          ["هناك ناس كثيرون","সেখানে অনেক মানুষ আছে।"],
+          ["انتظرني هنا","এখানে আমার জন্য অপেক্ষা করুন।"],
+          ["هيا نعود إلى البيت","চলুন বাসায় ফিরে যাই।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ১২: দাম জিজ্ঞেস করা",
+        lines: [
+          ["بكم هذا؟","এটির দাম কত?"],
+          ["كم سعر هذا؟","এটার মূল্য কত?"],
+          ["هذا غالٍ","এটি দামি।"],
+          ["هذا رخيص","এটি সস্তা।"],
+          ["السعر كثير","দাম বেশি।"],
+          ["هل يوجد خصم؟","কোনো ছাড় আছে কি?"],
+          ["نعم، يوجد خصم","হ্যাঁ, ছাড় আছে।"],
+          ["لا، لا يوجد خصم","না, কোনো ছাড় নেই।"],
+          ["أريد شيئاً أرخص","আমি আরও সস্তা কিছু চাই।"],
+          ["كم كيلو؟","প্রতি কেজি কত?"],
+          ["أريد كيلو واحد","আমি এক কেজি চাই।"],
+          ["أريد نصف كيلو","আমি আধা কেজি চাই।"],
+          ["أعطني اثنين من فضلك","অনুগ্রহ করে আমাকে দুটি দিন।"],
+          ["هذا جيد","এটি ভালো।"],
+          ["هذا ليس جيداً","এটি ভালো নয়।"],
+          ["هل تقبل النقود؟","আপনি কি নগদ টাকা নেন?"],
+          ["نعم، أقبل النقود","হ্যাঁ, আমি নগদ টাকা নিই।"],
+          ["هذه نقودك","এটি আপনার টাকা।"],
+          ["أعطني الباقي","আমাকে বাকি টাকা দিন।"],
+          ["شكراً على المساعدة","সাহায্যের জন্য ধন্যবাদ।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ১৩: কাপড় কেনা",
+        lines: [
+          ["أريد أن أشتري ملابس","আমি কাপড় কিনতে চাই।"],
+          ["أين متجر الملابس؟","কাপড়ের দোকান কোথায়?"],
+          ["أريد قميصاً","আমি একটি শার্ট চাই।"],
+          ["أريد سروالاً","আমি একটি প্যান্ট চাই।"],
+          ["أريد ثوباً","আমি একটি পোশাক চাই।"],
+          ["أريد حذاءً","আমি জুতা চাই।"],
+          ["ما مقاسك؟","আপনার মাপ কত?"],
+          ["مقاسي كبير","আমার মাপ বড়।"],
+          ["مقاسي صغير","আমার মাপ ছোট।"],
+          ["هذا صغير جداً","এটি খুব ছোট।"],
+          ["هذا كبير جداً","এটি খুব বড়।"],
+          ["هل يوجد مقاس آخر؟","অন্য মাপ আছে কি?"],
+          ["أريد اللون الأسود","আমি কালো রং চাই।"],
+          ["أريد اللون الأبيض","আমি সাদা রং চাই।"],
+          ["أريد اللون الأزرق","আমি নীল রং চাই।"],
+          ["هذا اللون جميل","এই রং সুন্দর।"],
+          ["هل يمكنني أن أجربه؟","আমি কি এটি পরে দেখতে পারি?"],
+          ["غرفة القياس هناك","পোশাক মাপার ঘর ওখানে।"],
+          ["سآخذه","আমি এটি নেব।"],
+          ["لا أريده","আমি এটি চাই না।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ১৪: ফল ও সবজি কেনা",
+        lines: [
+          ["أريد تفاحاً","আমি আপেল চাই।"],
+          ["أريد موزاً","আমি কলা চাই।"],
+          ["أريد برتقالاً","আমি কমলা চাই।"],
+          ["أريد عنباً","আমি আঙুর চাই।"],
+          ["أريد مانجو","আমি আম চাই।"],
+          ["أريد بطاطا","আমি আলু চাই।"],
+          ["أريد طماطم","আমি টমেটো চাই।"],
+          ["أريد بصلًا","আমি পেঁয়াজ চাই।"],
+          ["أريد خضروات","আমি সবজি চাই।"],
+          ["هل هذه طازجة؟","এগুলো কি তাজা?"],
+          ["نعم، هذه طازجة","হ্যাঁ, এগুলো তাজা।"],
+          ["هذه الفواكه حلوة","এই ফলগুলো মিষ্টি।"],
+          ["هذه الخضروات جيدة","এই সবজিগুলো ভালো।"],
+          ["أعطني كيلو تفاح","আমাকে এক কেজি আপেল দিন।"],
+          ["أعطني نصف كيلو طماطم","আমাকে আধা কেজি টমেটো দিন।"],
+          ["لا أريد هذا","আমি এটি চাই না।"],
+          ["أريد شيئاً جيداً","আমি ভালো কিছু চাই।"],
+          ["ضعها في الحقيبة","এগুলো ব্যাগে রাখুন।"],
+          ["هل هذا كل شيء؟","এটাই কি সব?"],
+          ["نعم، هذا كل شيء","হ্যাঁ, এটাই সব।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ১৫: দোকানদারের সঙ্গে কথা",
+        lines: [
+          ["السلام عليكم","আসসালামু আলাইকুম।"],
+          ["وعليكم السلام","ওয়া আলাইকুমুস সালাম।"],
+          ["ماذا تريد؟","আপনি কী চান?"],
+          ["أريد أن أشتري هذا","আমি এটি কিনতে চাই।"],
+          ["تفضل","নিন / আসুন।"],
+          ["هل تحتاج إلى مساعدة؟","আপনার কি সাহায্য দরকার?"],
+          ["نعم، من فضلك","হ্যাঁ, অনুগ্রহ করে।"],
+          ["أين أجد هذا؟","আমি এটি কোথায় পাব?"],
+          ["هذا موجود هنا","এটি এখানে আছে।"],
+          ["هل هذا جديد؟","এটি কি নতুন?"],
+          ["نعم، هذا جديد","হ্যাঁ, এটি নতুন।"],
+          ["هل هذا جيد؟","এটি কি ভালো?"],
+          ["نعم، هذا جيد جداً","হ্যাঁ, এটি খুব ভালো।"],
+          ["بكم هذا؟","এটির দাম কত?"],
+          ["السعر مئة تاكا","দাম একশ টাকা।"],
+          ["هذا غالٍ قليلاً","এটি একটু দামি।"],
+          ["سأفكر فيه","আমি এটি নিয়ে ভাবব।"],
+          ["سآتي لاحقاً","আমি পরে আসব।"],
+          ["شكراً لك","আপনাকে ধন্যবাদ।"],
+          ["أهلاً بك","আপনাকে স্বাগতম।"]
+        ]
+      }
+    ];
+
+    function showMenu() {
+      document.getElementById("menu").style.display = "block";
+      document.getElementById("page").style.display = "none";
+    }
+
+    function openLesson(index) {
+      const lesson = lessons[index];
+
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("page").style.display = "block";
+      document.getElementById("title").textContent = lesson.title;
+
+      const linesBox = document.getElementById("lines");
+      linesBox.innerHTML = "";
+
+      for (let i = 0; i < lesson.lines.length; i++) {
+        const box = document.createElement("div");
+        box.className = "line";
+
+        const arabic = document.createElement("div");
+        arabic.className = "arabic";
+        arabic.textContent = (i + 1) + ". " + lesson.lines[i][0];
+
+        const bangla = document.createElement("div");
+        bangla.className = "bangla";
+        bangla.textContent = lesson.lines[i][1];
+
+        const button = document.createElement("button");
+        button.className = "listen";
+        button.textContent = "🔊 শুনুন";
+
+        button.onclick = function () {
+          const speech = new SpeechSynthesisUtterance(lesson.lines[i][0]);
+          speech.lang = "ar-SA";
+          speech.rate = 0.75;
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(speech);
+        };
+
+        box.appendChild(arabic);
+        box.appendChild(bangla);
+        box.appendChild(button);
+
+        linesBox.appendChild(box);
+      }
+
+      window.scrollTo(0, 0);
+    }
+
+    for (let i = 0; i < lessons.length; i++) {
+      const button = document.createElement("button");
+
+      button.className = "lesson-button";
+      button.textContent = lessons[i].title;
+
+      button.onclick = function () {
+        openLesson(i);
+      };
+
+      document.getElementById("menu").appendChild(button);
+    }
+  </script>
+</body>
+</html>

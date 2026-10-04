@@ -1,99 +1,96 @@
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
-      error: "শুধু POST request গ্রহণ করা হয়।"
+      error: "Only POST allowed"
     });
   }
 
   try {
     const message = req.body.message;
 
-    if (!message) {
-      return res.status(400).json({
-        error: "কোনো আরবি বাক্য পাওয়া যায়নি।"
-      });
-    }
+    const prompt = `
+তুমি বাংলা ভাষাভাষীদের জন্য একজন সহজ আরবি শিক্ষক।
 
-    const teacherPrompt = `
-তুমি একজন ধৈর্যশীল আরবি ভাষার শিক্ষক।
-শিক্ষার্থী বাংলা ভাষাভাষী এবং সহজ আরবি কথোপকথন শিখছে।
-
-শিক্ষার্থীর আরবি বাক্য:
+শিক্ষার্থীর লেখা:
 ${message}
 
-তুমি অবশ্যই নিচের format-এ উত্তর দেবে:
+নিচের format-এ উত্তর দাও:
 
-ARABIC: এখানে সহজ, শুদ্ধ আরবি উত্তর লিখবে।
-BANGLA: এখানে খুব সহজ বাংলায় অর্থ বা ব্যাখ্যা লিখবে।
-CORRECTION: ভুল থাকলে শুদ্ধ বাক্য ও ছোট কারণ লিখবে। ভুল না থাকলে খালি রাখবে।
+ARABIC: সহজ ও শুদ্ধ আরবি উত্তর
+BANGLA: সহজ বাংলায় অর্থ বা ব্যাখ্যা
+CORRECTION: ভুল থাকলে শুদ্ধ বাক্য ও কারণ। ভুল না থাকলে খালি রাখো।
 
 নিয়ম:
 - খুব সহজ আরবি ব্যবহার করবে।
-- একবারে ছোট উত্তর দেবে।
-- শিক্ষার্থী ভুল করলে ভদ্রভাবে সংশোধন করবে।
-- কঠিন শব্দ ব্যবহার করবে না।
-- উত্তরটি শিক্ষক ও শিক্ষার্থীর কথোপকথনের মতো হবে।
+- ছোট উত্তর দেবে।
+- ভুল হলে ভদ্রভাবে ঠিক করবে।
+- শিক্ষার্থীকে আবার আরবিতে উত্তর দিতে বলবে।
 `;
 
-    const aiResponse = await fetch(
-      "https://api.openai.com/v1/responses",
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/interactions",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+          "x-goog-api-key": process.env.GEMINI_API_KEY
         },
         body: JSON.stringify({
-          model: "gpt-6-astra",
-          input: teacherPrompt
+          model: "gemini-3.8-flash",
+          input: prompt
         })
       }
     );
 
-    const result = await aiResponse.json();
+    const result = await response.json();
 
-    if (!aiResponse.ok) {
-      throw new Error("AI API error");
+    if (!response.ok) {
+      return res.status(500).json({
+        error: result.error?.message || "Gemini AI error"
+      });
     }
 
-    let outputText = "";
+    const outputText = result.steps
+      ?.filter(function (step) {
+        return step.type === "model_output";
+      })
+      .flatMap(function (step) {
+        return step.content || [];
+      })
+      .map(function (item) {
+        return item.text || "";
+      })
+      .join("
+") || "";
 
-    if (result.output_text) {
-      outputText = result.output_text;
-    } else if (result.output && result.output[0]) {
-      const content = result.output[0].content || [];
+    const arabicMatch = outputText.match(
+      /ARABIC:s*([sS]*?)(?=
+BANGLA:|$)/i
+    );
 
-      outputText = content
-        .map(function (item) {
-          return item.text || "";
-        })
-        .join("
-");
-    }
+    const banglaMatch = outputText.match(
+      /BANGLA:s*([sS]*?)(?=
+CORRECTION:|$)/i
+    );
 
-    const arabicMatch = outputText.match(/ARABIC:s*([sS]*?)(?=
-BANGLA:|$)/i);
-    const banglaMatch = outputText.match(/BANGLA:s*([sS]*?)(?=
-CORRECTION:|$)/i);
-    const correctionMatch = outputText.match(/CORRECTION:s*([sS]*)/i);
-
-    const arabic = arabicMatch
-      ? arabicMatch[1].trim()
-      : "أَحْسَنْتَ، تَابِعْ.";
-
-    const bangla = banglaMatch
-      ? banglaMatch[1].trim()
-      : "ভালো চেষ্টা করেছেন। আরবিতে আরও একটি ছোট বাক্য বলুন।";
-
-    const correction = correctionMatch
-      ? correctionMatch[1].trim()
-      : "";
+    const correctionMatch = outputText.match(
+      /CORRECTION:s*([sS]*)/i
+    );
 
     return res.status(200).json({
-      arabic,
-      bangla,
-      correction
+      arabic: arabicMatch
+        ? arabicMatch[1].trim()
+        : "أَحْسَنْتَ، تَابِعْ.",
+
+      bangla: banglaMatch
+        ? banglaMatch[1].trim()
+        : "ভালো চেষ্টা করেছেন। আরবিতে আবার বলুন।",
+
+      correction: correctionMatch
+        ? correctionMatch[1].trim()
+        : ""
     });
+
   } catch (error) {
     return res.status(500).json({
       error: "AI শিক্ষক এখন উত্তর দিতে পারছে না।"

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আরবি পাঠ ৬–১০</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f7f3;
+      color: #183b2c;
+    }
+
+    .app {
+      max-width: 520px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+    }
+
+    header {
+      padding: 22px 18px;
+      color: white;
+      background: #087443;
+      border-radius: 0 0 25px 25px;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+    }
+
+    header h1 {
+      font-size: 25px;
+    }
+
+    #menu, #page {
+      padding: 16px;
+    }
+
+    #page {
+      display: none;
+    }
+
+    .lesson-button {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 19px;
+      color: #075b34;
+      background: #e8f6ee;
+      border: 1px solid #b8dfc7;
+      border-radius: 15px;
+      text-align: left;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .back {
+      padding: 10px;
+      color: white;
+      background: #087443;
+      border: 0;
+      border-radius: 9px;
+    }
+
+    .line {
+      margin: 13px 0;
+      padding: 17px;
+      background: #f0f9f3;
+      border: 1px solid #d1ead9;
+      border-radius: 13px;
+    }
+
+    .arabic {
+      color: #075b34;
+      font-size: 27px;
+      text-align: right;
+      direction: rtl;
+    }
+
+    .bangla {
+      margin-top: 8px;
+      font-size: 18px;
+    }
+
+    .listen {
+      margin-top: 10px;
+      padding: 9px;
+      color: #075b34;
+      background: #d3f0df;
+      border: 0;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <header>
+      <a href="lessons.html">← সব পাঠে যান</a>
+      <h1>আরবি পাঠ ৬–১০</h1>
+      <p>প্রতি পাঠে ২০টি বাক্য</p>
+    </header>
+
+    <section id="menu"></section>
+
+    <section id="page">
+      <button class="back" onclick="showMenu()">← পাঠের তালিকা</button>
+      <h2 id="title"></h2>
+      <div id="lines"></div>
+    </section>
+
+  </main>
+
+  <script>
+    const lessons = [
+
+      {
+        title: "পাঠ ৬: সকালবেলার কথা",
+        lines: [
+          ["صباح الخير", "সুপ্রভাত।"],
+          ["صباح النور", "আলোর সকাল।"],
+          ["متى تستيقظ؟", "আপনি কখন ঘুম থেকে ওঠেন?"],
+          ["أستيقظ في الصباح", "আমি সকালে ঘুম থেকে উঠি।"],
+          ["أنا أستيقظ مبكراً", "আমি ভোরে ঘুম থেকে উঠি।"],
+          ["هل نمت جيداً؟", "আপনি কি ভালো ঘুমিয়েছেন?"],
+          ["نعم، نمت جيداً", "হ্যাঁ, আমি ভালো ঘুমিয়েছি।"],
+          ["أنا نعسان", "আমার ঘুম পাচ্ছে। ছেলে বলবে।"],
+          ["أنا نعسانة", "আমার ঘুম পাচ্ছে। মেয়ে বলবে।"],
+          ["اغسل وجهك", "আপনার মুখ ধুয়ে নিন।"],
+          ["أنا أغسل وجهي", "আমি আমার মুখ ধুই।"],
+          ["أنا أفرش أسناني", "আমি দাঁত ব্রাশ করি।"],
+          ["أين المنشفة؟", "তোয়ালে কোথায়?"],
+          ["المنشفة هنا", "তোয়ালেটি এখানে আছে।"],
+          ["ارتد ملابسك", "আপনার কাপড় পরুন। ছেলে বলবে।"],
+          ["ارتدي ملابسك", "আপনার কাপড় পরুন। মেয়ে বলবে।"],
+          ["أنا جاهز", "আমি প্রস্তুত। ছেলে বলবে।"],
+          ["أنا جاهزة", "আমি প্রস্তুত। মেয়ে বলবে।"],
+          ["صباح جميل", "সুন্দর সকাল।"],
+          ["هيا نذهب", "চলুন যাই।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ৭: খাবার খাওয়া",
+        lines: [
+          ["هل أنت جائع؟", "আপনার কি ক্ষুধা লেগেছে?"],
+          ["نعم، أنا جائع", "হ্যাঁ, আমার ক্ষুধা লেগেছে। ছেলে বলবে।"],
+          ["نعم، أنا جائعة", "হ্যাঁ, আমার ক্ষুধা লেগেছে। মেয়ে বলবে।"],
+          ["ماذا تريد أن تأكل؟", "আপনি কী খেতে চান?"],
+          ["أريد أن آكل الأرز", "আমি ভাত খেতে চাই।"],
+          ["أريد الخبز", "আমি রুটি চাই।"],
+          ["أريد السمك", "আমি মাছ চাই।"],
+          ["أريد الدجاج", "আমি মুরগির মাংস চাই।"],
+          ["هذا الطعام لذيذ", "এই খাবার সুস্বাদু।"],
+          ["الطعام حار", "খাবার গরম।"],
+          ["الطعام بارد", "খাবার ঠান্ডা।"],
+          ["هل الطعام جاهز؟", "খাবার কি প্রস্তুত?"],
+          ["نعم، الطعام جاهز", "হ্যাঁ, খাবার প্রস্তুত।"],
+          ["بسم الله", "আল্লাহর নামে শুরু করছি।"],
+          ["كل جيداً", "ভালোভাবে খান।"],
+          ["أنا آكل الآن", "আমি এখন খাচ্ছি।"],
+          ["هل تريد المزيد؟", "আপনি কি আরও চান?"],
+          ["نعم، أريد المزيد", "হ্যাঁ, আমি আরও চাই।"],
+          ["لا، شكراً", "না, ধন্যবাদ।"],
+          ["الحمد لله", "আলহামদুলিল্লাহ।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ৮: পানীয় চাওয়া",
+        lines: [
+          ["هل أنت عطشان؟", "আপনার কি তৃষ্ণা লেগেছে?"],
+          ["نعم، أنا عطشان", "হ্যাঁ, আমার তৃষ্ণা লেগেছে। ছেলে বলবে।"],
+          ["نعم، أنا عطشانة", "হ্যাঁ, আমার তৃষ্ণা লেগেছে। মেয়ে বলবে।"],
+          ["أريد ماء", "আমি পানি চাই।"],
+          ["أريد كوباً من الماء", "আমি এক গ্লাস পানি চাই।"],
+          ["هل تريد الشاي؟", "আপনি কি চা চান?"],
+          ["نعم، أريد الشاي", "হ্যাঁ, আমি চা চাই।"],
+          ["هل تريد القهوة؟", "আপনি কি কফি চান?"],
+          ["أريد القهوة", "আমি কফি চাই।"],
+          ["الشاي ساخن", "চা গরম।"],
+          ["الماء بارد", "পানি ঠান্ডা।"],
+          ["أعطني ماء من فضلك", "অনুগ্রহ করে আমাকে পানি দিন।"],
+          ["تفضل", "নিন / এই নিন।"],
+          ["شكراً جزيلاً", "অনেক ধন্যবাদ।"],
+          ["العفو", "স্বাগতম।"],
+          ["أين الماء؟", "পানি কোথায়?"],
+          ["الماء على الطاولة", "পানি টেবিলের ওপর আছে।"],
+          ["اشرب الماء", "পানি পান করুন।"],
+          ["أنا أشرب الآن", "আমি এখন পান করছি।"],
+          ["العصير لذيذ", "জুস সুস্বাদু।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ৯: রান্নাঘর ও রান্না",
+        lines: [
+          ["أين المطبخ؟", "রান্নাঘর কোথায়?"],
+          ["المطبخ هنا", "রান্নাঘর এখানে।"],
+          ["أنا في المطبخ", "আমি রান্নাঘরে আছি।"],
+          ["ماذا تطبخ؟", "আপনি কী রান্না করছেন?"],
+          ["أنا أطبخ الأرز", "আমি ভাত রান্না করছি।"],
+          ["أنا أطبخ السمك", "আমি মাছ রান্না করছি।"],
+          ["أنا أطبخ الدجاج", "আমি মুরগির মাংস রান্না করছি।"],
+          ["أين الملح؟", "লবণ কোথায়?"],
+          ["الملح على الطاولة", "লবণ টেবিলের ওপর আছে।"],
+          ["أعطني الزيت", "আমাকে তেল দিন।"],
+          ["أعطني السكر", "আমাকে চিনি দিন।"],
+          ["أين السكين؟", "ছুরি কোথায়?"],
+          ["السكين هنا", "ছুরি এখানে আছে।"],
+          ["هذه ملعقة", "এটি একটি চামচ।"],
+          ["هذا صحن", "এটি একটি প্লেট।"],
+          ["اغسل الصحون", "প্লেটগুলো ধুয়ে নিন।"],
+          ["الطعام جاهز", "খাবার প্রস্তুত।"],
+          ["رائحة الطعام جميلة", "খাবারের ঘ্রাণ সুন্দর।"],
+          ["الطعام لذيذ جداً", "খাবার খুব সুস্বাদু।"],
+          ["هيا نأكل", "চলুন খাই।"]
+        ]
+      },
+
+      {
+        title: "পাঠ ১০: রেস্টুরেন্টে কথাবার্তা",
+        lines: [
+          ["مرحباً", "স্বাগতম।"],
+          ["أريد طاولة لشخصين", "আমি দুজনের জন্য একটি টেবিল চাই।"],
+          ["هل توجد طاولة فارغة؟", "খালি টেবিল আছে কি?"],
+          ["نعم، تفضل", "হ্যাঁ, আসুন।"],
+          ["أعطني القائمة من فضلك", "অনুগ্রহ করে আমাকে মেনু দিন।"],
+          ["ماذا تريد أن تأكل؟", "আপনি কী খেতে চান?"],
+          ["أريد الأرز والدجاج", "আমি ভাত ও মুরগির মাংস চাই।"],
+          ["أريد السمك", "আমি মাছ চাই।"],
+          ["هل الطعام حلال؟", "খাবার কি হালাল?"],
+          ["نعم، الطعام حلال", "হ্যাঁ, খাবার হালাল।"],
+          ["أريد ماء بارداً", "আমি ঠান্ডা পানি চাই।"],
+          ["أريد الشاي بعد الطعام", "আমি খাবারের পরে চা চাই।"],
+          ["الطعام لذيذ", "খাবার সুস্বাদু।"],
+          ["الخدمة جيدة", "সেবাটি ভালো।"],
+          ["من فضلك، الحساب", "অনুগ্রহ করে বিল দিন।"],
+          ["كم الحساب؟", "বিল কত?"],
+          ["الحساب مئة تاكا", "বিল একশ টাকা।"],
+          ["هذا كثير", "এটা বেশি।"],
+          ["شكراً لكم", "আপনাদের ধন্যবাদ।"],
+          ["مع السلامة", "বিদায়।"]
+        ]
+      }
+
+    ];
+
+    function showMenu() {
+      document.getElementById("menu").style.display = "block";
+      document.getElementById("page").style.display = "none";
+    }
+
+    function openLesson(index) {
+      const lesson = lessons[index];
+
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("page").style.display = "block";
+      document.getElementById("title").textContent = lesson.title;
+
+      const linesBox = document.getElementById("lines");
+      linesBox.innerHTML = "";
+
+      for (let i = 0; i < lesson.lines.length; i++) {
+        const box = document.createElement("div");
+        box.className = "line";
+
+        const arabic = document.createElement("div");
+        arabic.className = "arabic";
+        arabic.textContent = (i + 1) + ". " + lesson.lines[i][0];
+
+        const bangla = document.createElement("div");
+        bangla.className = "bangla";
+        bangla.textContent = lesson.lines[i][1];
+
+        const button = document.createElement("button");
+        button.className = "listen";
+        button.textContent = "🔊 শুনুন";
+
+        button.onclick = function () {
+          const speech = new SpeechSynthesisUtterance(lesson.lines[i][0]);
+          speech.lang = "ar-SA";
+          speech.rate = 0.75;
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(speech);
+        };
+
+        box.appendChild(arabic);
+        box.appendChild(bangla);
+        box.appendChild(button);
+
+        linesBox.appendChild(box);
+      }
+
+      window.scrollTo(0, 0);
+    }
+
+    for (let i = 0; i < lessons.length; i++) {
+      const button = document.createElement("button");
+
+      button.className = "lesson-button";
+      button.textContent = lessons[i].title;
+
+      button.onclick = function () {
+        openLesson(i);
+      };
+
+      document.getElementById("menu").appendChild(button);
+    }
+  </script>
+</body>
+</html>

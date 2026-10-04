@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لِسَانُ العَرَبِيَّة</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: #f6f7f2;
+      color: #18352a;
+    }
+
+    .app {
+      max-width: 520px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #ffffff;
+      padding-bottom: 85px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0b5d3b, #15835a);
+      color: white;
+      text-align: center;
+      padding: 38px 20px 44px;
+      border-radius: 0 0 30px 30px;
+    }
+
+    .arabic-title {
+      direction: rtl;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 9px;
+    }
+
+    .english-title {
+      font-size: 16px;
+      letter-spacing: 1px;
+      opacity: 0.9;
+      margin-bottom: 14px;
+    }
+
+    .tagline {
+      font-size: 15px;
+      line-height: 1.7;
+      opacity: 0.95;
+    }
+
+    .daily-card {
+      margin: -23px 16px 20px;
+      padding: 18px;
+      background: #fffdf5;
+      border: 1px solid #e7d9a8;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .small-title {
+      color: #9a7200;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .daily-arabic {
+      direction: rtl;
+      font-size: 21px;
+      font-weight: bold;
+      color: #163f2d;
+      margin-bottom: 8px;
+    }
+
+    .meaning {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #52635b;
+    }
+
+    .section {
+      padding: 4px 16px 10px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin: 10px 0 14px;
+      color: #18352a;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5ebe6;
+      border-radius: 16px;
+      padding: 18px 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(20, 70, 45, 0.06);
+      cursor: pointer;
+    }
+
+    .card:active {
+      transform: scale(0.98);
+    }
+
+    .icon {
+      font-size: 31px;
+      margin-bottom: 9px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      color: #18352a;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #6e7e75;
+    }
+
+    .ai-box {
+      margin: 16px;
+      padding: 19px;
+      border-radius: 18px;
+      background: #e8f6ee;
+      border: 1px solid #b8e0c7;
+    }
+
+    .ai-box h3 {
+      font-size: 18px;
+      color: #075b34;
+      margin-bottom: 8px;
+    }
+
+    .ai-box p {
+      color: #476158;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .ai-button {
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 11px;
+      padding: 13px;
+      background: #087443;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 8px 10px;
+      background: white;
+      border-top: 1px solid #e6ebe7;
+    }
+
+    .nav-item {
+      text-align: center;
+      color: #718078;
+      font-size: 11px;
+    }
+
+    .nav-item.active {
+      color: #087443;
+      font-weight: bold;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 21px;
+      margin-bottom: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <section class="hero">
+      <div class="arabic-title">لِسَانُ العَرَبِيَّة</div>
+      <div class="english-title">LISĀN AL-ʿARABIYYAH</div>
+      <p class="tagline">আরবি শিখুন • আরবিতে কথা বলুন<br />AI-এর সঙ্গে অনুশীলন করুন</p>
+    </section>
+
+    <section class="daily-card">
+      <div class="small-title">আজকের আরবি বাক্য</div>
+      <div class="daily-arabic">اَلسَّلَامُ عَلَيْكُمْ</div>
+      <p class="meaning">উচ্চারণ: আস-সালামু আলাইকুম<br />অর্থ: আপনার ওপর শান্তি বর্ষিত হোক।</p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">আজ কী শিখবেন?</h2>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">📚</div>
+          <h3>আরবি পাঠ</h3>
+          <p>বর্ণ, শব্দ, বাক্য ও ব্যাকরণ শিখুন</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔤</div>
+          <h3>শব্দভান্ডার</h3>
+          <p>প্রয়োজনীয় আরবি শব্দ ও অর্থ শিখুন</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">📝</div>
+          <h3>কুইজ</h3>
+          <p>প্রশ্নের উত্তর দিয়ে নিজের জ্ঞান যাচাই করুন</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🎙️</div>
+          <h3>কথোপকথন</h3>
+          <p>দৈনন্দিন আরবি সংলাপ অনুশীলন করুন</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-box">
+      <h3>🤖 AI আরবি শিক্ষক</h3>
+      <p>আরবিতে লিখুন বা বলুন। AI আপনার ভুল সংশোধন করবে, আরবি উত্তর দেবে এবং বাংলায় সহজ ব্যাখ্যা করবে।</p>
+      <button class="ai-button">AI শিক্ষকের সঙ্গে কথা বলুন</button>
+    </section>
+
+    <nav class="bottom-nav">
+      <div class="nav-item active">
+        <span class="nav-icon">⌂</span>
+        হোম
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">📚</span>
+        পাঠ
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">💬</span>
+        AI চ্যাট
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">👤</span>
+        প্রোফাইল
+      </div>
+    </nav>
+
+  </main>
+</body>
+</html>

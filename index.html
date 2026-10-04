@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>لِسَانُ العَرَبِيَّة</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0B5D3B" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
   <style>
     * {
@@ -23,12 +29,12 @@
       min-height: 100vh;
       margin: 0 auto;
       background: #ffffff;
-      padding-bottom: 85px;
+      padding-bottom: 88px;
     }
 
     .hero {
       background: linear-gradient(135deg, #0b5d3b, #15835a);
-      color: white;
+      color: #ffffff;
       text-align: center;
       padding: 38px 20px 44px;
       border-radius: 0 0 30px 30px;
@@ -42,8 +48,8 @@
     }
 
     .english-title {
-      font-size: 16px;
-      letter-spacing: 1px;
+      font-size: 15px;
+      letter-spacing: 1.5px;
       opacity: 0.9;
       margin-bottom: 14px;
     }
@@ -51,7 +57,7 @@
     .tagline {
       font-size: 15px;
       line-height: 1.7;
-      opacity: 0.95;
+      opacity: 0.96;
     }
 
     .daily-card {
@@ -72,16 +78,17 @@
 
     .daily-arabic {
       direction: rtl;
-      font-size: 21px;
+      text-align: right;
+      font-size: 22px;
       font-weight: bold;
       color: #163f2d;
       margin-bottom: 8px;
     }
 
     .meaning {
-      font-size: 14px;
-      line-height: 1.6;
       color: #52635b;
+      font-size: 14px;
+      line-height: 1.65;
     }
 
     .section {
@@ -108,10 +115,11 @@
       text-align: center;
       box-shadow: 0 4px 12px rgba(20, 70, 45, 0.06);
       cursor: pointer;
+      transition: 0.2s;
     }
 
     .card:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
     }
 
     .icon {
@@ -140,8 +148,8 @@
     }
 
     .ai-box h3 {
-      font-size: 18px;
       color: #075b34;
+      font-size: 18px;
       margin-bottom: 8px;
     }
 
@@ -159,9 +167,10 @@
       border-radius: 11px;
       padding: 13px;
       background: #087443;
-      color: white;
+      color: #ffffff;
       font-size: 15px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .bottom-nav {
@@ -174,7 +183,7 @@
       display: flex;
       justify-content: space-around;
       padding: 12px 8px 10px;
-      background: white;
+      background: #ffffff;
       border-top: 1px solid #e6ebe7;
     }
 
@@ -182,6 +191,7 @@
       text-align: center;
       color: #718078;
       font-size: 11px;
+      cursor: pointer;
     }
 
     .nav-item.active {
@@ -203,13 +213,19 @@
     <section class="hero">
       <div class="arabic-title">لِسَانُ العَرَبِيَّة</div>
       <div class="english-title">LISĀN AL-ʿARABIYYAH</div>
-      <p class="tagline">আরবি শিখুন • আরবিতে কথা বলুন<br />AI-এর সঙ্গে অনুশীলন করুন</p>
+      <p class="tagline">
+        আরবি শিখুন • আরবিতে কথা বলুন<br />
+        AI-এর সঙ্গে অনুশীলন করুন
+      </p>
     </section>
 
     <section class="daily-card">
       <div class="small-title">আজকের আরবি বাক্য</div>
       <div class="daily-arabic">اَلسَّلَامُ عَلَيْكُمْ</div>
-      <p class="meaning">উচ্চারণ: আস-সালামু আলাইকুম<br />অর্থ: আপনার ওপর শান্তি বর্ষিত হোক।</p>
+      <p class="meaning">
+        উচ্চারণ: আস-সালামু আলাইকুম<br />
+        অর্থ: আপনার ওপর শান্তি বর্ষিত হোক।
+      </p>
     </section>
 
     <section class="section">
@@ -225,7 +241,7 @@
         <div class="card">
           <div class="icon">🔤</div>
           <h3>শব্দভান্ডার</h3>
-          <p>প্রয়োজনীয় আরবি শব্দ ও অর্থ শিখুন</p>
+          <p>প্রয়োজনীয় আরবি শব্দ ও বাংলা অর্থ শিখুন</p>
         </div>
 
         <div class="card">
@@ -244,8 +260,13 @@
 
     <section class="ai-box">
       <h3>🤖 AI আরবি শিক্ষক</h3>
-      <p>আরবিতে লিখুন বা বলুন। AI আপনার ভুল সংশোধন করবে, আরবি উত্তর দেবে এবং বাংলায় সহজ ব্যাখ্যা করবে।</p>
-      <button class="ai-button">AI শিক্ষকের সঙ্গে কথা বলুন</button>
+      <p>
+        আরবিতে লিখুন বা বলুন। AI আপনার ভুল সংশোধন করবে,
+        আরবিতে উত্তর দেবে এবং বাংলায় সহজ ব্যাখ্যা করবে।
+      </p>
+      <button class="ai-button" onclick="showMessage()">
+        AI শিক্ষকের সঙ্গে কথা বলুন
+      </button>
     </section>
 
     <nav class="bottom-nav">
@@ -253,14 +274,17 @@
         <span class="nav-icon">⌂</span>
         হোম
       </div>
+
       <div class="nav-item">
         <span class="nav-icon">📚</span>
         পাঠ
       </div>
+
       <div class="nav-item">
         <span class="nav-icon">💬</span>
         AI চ্যাট
       </div>
+
       <div class="nav-item">
         <span class="nav-icon">👤</span>
         প্রোফাইল
@@ -268,5 +292,17 @@
     </nav>
 
   </main>
+
+  <script>
+    function showMessage() {
+      alert("AI আরবি শিক্ষক ফিচারটি শিগগিরই যুক্ত করা হবে, ইনশাআল্লাহ।");
+    }
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js");
+      });
+    }
+  </script>
 </body>
 </html>
